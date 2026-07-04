@@ -1,659 +1,723 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ICT Mentorship | Apollo</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = {
-darkMode: 'class',
-theme: {
-extend: {
-colors: {
-ict: {
-bg: '#020617', // slate-950
-panel: '#0f172a', // slate-900
-border: '#1e293b', // slate-800
-pink: '#ff66b2', // neon rose pink
-pinkHover: '#ff4d99',
-win: '#34d399', // emerald-400
-text: '#cbd5e1' // slate-300
-}
-}
-}
-}
-}
-</script>
-<style>
-body { background-color: #020617; color: #cbd5e1; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #020617; }
-::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #ff66b2; }
-.hidden { display: none !important; }
-.fade-in { animation: fadeIn 0.3s ease-in-out; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICT Mentorship | Apollo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        ict: {
+                            bg: '#020617', // slate-950
+                            panel: '#0f172a', // slate-900
+                            border: '#1e293b', // slate-800
+                            pink: '#ff66b2', // neon rose pink
+                            pinkHover: '#ff4d99',
+                            win: '#34d399', // emerald-400
+                            text: '#cbd5e1' // slate-300
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #020617; color: #cbd5e1; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff66b2; }
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Custom Checkbox Styling */
+        input[type="checkbox"] {
+            accent-color: #ff66b2;
+            width: 1.1rem;
+            height: 1.1rem;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body class="h-screen w-screen overflow-hidden flex flex-col">
 
-<div id="login-view" class="fixed inset-0 z-50 flex items-center justify-center bg-ict-bg fade-in">
-<div class="bg-ict-panel border border-ict-border p-8 rounded-xl shadow-2xl w-full max-w-md text-center">
-<h1 class="text-3xl font-bold text-white mb-2">Welcome Emilia ❤️</h1>
-<p class="text-sm text-gray-400 mb-6">Enter your credentials to access the terminal.</p>
-<input type="text" id="username" placeholder="Username" class="w-full bg-ict-bg border border-ict-border rounded px-4 py-3 mb-4 text-white focus:outline-none focus:border-ict-pink">
-<input type="password" id="password" placeholder="Password" class="w-full bg-ict-bg border border-ict-border rounded px-4 py-3 mb-6 text-white focus:outline-none focus:border-ict-pink">
-<button onclick="attemptLogin()" class="w-full bg-ict-pink hover:bg-ict-pinkHover text-white font-bold py-3 px-4 rounded transition">Login</button>
-<p id="login-error" class="text-red-400 text-sm mt-4 hidden">Invalid credentials. Try again.</p>
-</div>
-</div>
-
-<div id="app-view" class="hidden flex h-full w-full">
-<aside class="w-64 bg-ict-panel border-r border-ict-border flex flex-col h-full">
-<div class="p-6 border-b border-ict-border">
-<h2 class="text-xl font-bold text-white tracking-wider flex items-center gap-2">
-<span class="text-ict-pink">ICT</span> APOLLO
-</h2>
-</div>
-<nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-<button onclick="nav('dashboard')" class="w-full text-left px-4 py-2 rounded hover:bg-ict-border hover:text-white transition">Dashboard & Sync</button>
-<button onclick="nav('courses')" class="w-full text-left px-4 py-2 rounded hover:bg-ict-border hover:text-white transition">Curriculum</button>
-<button onclick="nav('quizzes')" class="w-full text-left px-4 py-2 rounded hover:bg-ict-border hover:text-white transition">Quizzes</button>
-<button onclick="nav('notes')" class="w-full text-left px-4 py-2 rounded hover:bg-ict-border hover:text-white transition">Study Notes</button>
-</nav>
-<div class="p-4 border-t border-ict-border text-xs text-center text-gray-500">
-<p>Made by your baby Mustafa 🩷</p>
-<button onclick="logout()" class="mt-2 text-ict-pink hover:underline">Logout</button>
-</div>
-</aside>
-
-<main class="flex-1 h-full overflow-y-auto p-8 relative" id="main-content">
-
-<div id="view-dashboard" class="fade-in">
-<h2 class="text-3xl font-bold text-white mb-6">Your Dashboard</h2>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-<div class="bg-ict-panel border border-ict-border p-6 rounded-xl">
-<p class="text-gray-400 text-sm">Study Streak</p>
-<p class="text-4xl font-bold text-ict-pink mt-2"><span id="streak-counter">0</span> Days 🔥</p>
-</div>
-<div class="bg-ict-panel border border-ict-border p-6 rounded-xl">
-<p class="text-gray-400 text-sm">Course Progress</p>
-<p class="text-4xl font-bold text-white mt-2"><span id="progress-percent">0</span>%</p>
-</div>
-<div class="bg-ict-panel border border-ict-border p-6 rounded-xl">
-<p class="text-gray-400 text-sm">Quiz Average</p>
-<p class="text-4xl font-bold text-ict-win mt-2"><span id="quiz-avg">0</span>%</p>
-</div>
-</div>
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="bg-ict-panel border border-ict-border p-6 rounded-xl">
-<h3 class="text-xl font-bold text-white mb-4">Cross-Device Sync</h3>
-<p class="text-sm text-gray-400 mb-4">Your progress lives in this browser. To continue on your phone or another computer, export your data and import it there.</p>
-<p class="text-xs text-ict-pink mb-4">Last Export: <span id="last-export-date">Never</span></p>
-
-<div class="flex gap-4">
-<button onclick="exportData()" class="flex-1 bg-ict-border hover:bg-gray-700 text-white py-2 rounded text-sm transition">⬇️ Export Progress</button>
-<label class="flex-1 bg-ict-border hover:bg-gray-700 text-white py-2 rounded text-sm transition cursor-pointer text-center">
-⬆️ Import Progress
-<input type="file" class="hidden" accept=".json" onchange="importData(event)">
-</label>
-</div>
-</div>
-
-<div class="bg-ict-panel border border-ict-border p-6 rounded-xl">
-<h3 class="text-xl font-bold text-white mb-4">Recent Activity</h3>
-<ul id="activity-feed" class="space-y-3 text-sm text-gray-400">
-</ul>
-</div>
-</div>
-</div>
-
-<div id="view-courses" class="hidden fade-in">
-<h2 class="text-3xl font-bold text-white mb-6">Curriculum</h2>
-<div id="modules-container" class="space-y-4">
-</div>
-</div>
-
-<div id="view-lesson" class="hidden fade-in">
-<button onclick="nav('courses')" class="text-ict-pink hover:underline mb-4">← Back to Curriculum</button>
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-<div class="lg:col-span-2">
-<h2 id="lesson-title" class="text-2xl font-bold text-white mb-2">Lesson Title</h2>
-<div class="aspect-video bg-black rounded-xl overflow-hidden border border-ict-border mb-4">
-<iframe id="lesson-video" class="w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
-</div>
-<div class="bg-ict-panel border border-ict-border p-6 rounded-xl mb-4">
-<h3 class="text-lg font-bold text-white mb-2">Concept Breakdown</h3>
-<p id="lesson-desc" class="text-gray-300 text-sm leading-relaxed mb-4"></p>
-<h4 class="font-bold text-white mb-2">Key Takeaways:</h4>
-<ul id="lesson-checklist" class="list-disc pl-5 text-sm text-gray-300 space-y-1"></ul>
-</div>
-<button id="btn-complete" onclick="toggleLessonComplete()" class="w-full py-3 rounded-xl font-bold transition border border-ict-border"></button>
-</div>
-<div>
-<h3 class="text-xl font-bold text-white mb-4">Study Notes</h3>
-<textarea id="lesson-notes" oninput="saveNotes()" class="w-full h-[500px] bg-ict-panel border border-ict-border rounded-xl p-4 text-gray-300 focus:outline-none focus:border-ict-pink resize-none" placeholder="Type your notes for this lesson here... They auto-save."></textarea>
-</div>
-</div>
-</div>
-
-<div id="view-quizzes" class="hidden fade-in">
-<h2 class="text-3xl font-bold text-white mb-6">Knowledge Check</h2>
-<div class="bg-blue-900/20 border border-blue-900/50 p-4 rounded-xl mb-6 text-sm text-blue-200">
-Get 100% on a quiz to unlock a special message from Mustafa! Complete the lessons in the module before attempting.
-</div>
-<div id="quiz-list-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-</div>
-</div>
-
-<div id="view-quiz-run" class="hidden fade-in max-w-3xl mx-auto">
-<button onclick="nav('quizzes')" class="text-ict-pink hover:underline mb-4">← Abandon Quiz</button>
-<div class="bg-ict-panel border border-ict-border p-8 rounded-xl">
-<h2 id="active-quiz-title" class="text-2xl font-bold text-white mb-6">Quiz</h2>
-<form id="quiz-form" onsubmit="submitQuiz(event)">
-<div id="quiz-questions-container" class="space-y-8 mb-8">
-</div>
-<button type="submit" class="w-full bg-ict-pink hover:bg-ict-pinkHover text-white font-bold py-3 rounded transition">Submit Answers</button>
-</form>
-<div id="quiz-results" class="hidden mt-6 p-4 rounded border text-center font-bold text-lg"></div>
-</div>
-</div>
-
-<div id="view-notes" class="hidden fade-in">
-<h2 class="text-3xl font-bold text-white mb-6">Global Study Notes</h2>
-<input type="text" id="note-search" placeholder="Search your notes by keyword..." oninput="renderAllNotes()" class="w-full bg-ict-panel border border-ict-border rounded px-4 py-3 mb-6 text-white focus:outline-none focus:border-ict-pink">
-<div id="all-notes-container" class="space-y-4">
-</div>
-</div>
-
-</main>
-</div>
-
-<div id="celebration-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm fade-in">
-<div class="bg-ict-panel border border-ict-pink p-10 rounded-2xl shadow-[0_0_50px_-12px_rgba(255,102,178,0.5)] text-center max-w-md w-full mx-4">
-<div class="text-6xl mb-4">🎉</div>
-<h2 class="text-3xl font-bold text-ict-pink mb-4">Flawless Victory!</h2>
-<p class="text-xl text-white font-medium mb-6">"Proud of you, baby! 🩷"</p>
-<p class="text-sm text-gray-400 mb-8">Playing your reward audio...</p>
-<button onclick="closeModal()" class="w-full bg-ict-border hover:bg-gray-700 text-white font-bold py-3 rounded transition">Close</button>
-</div>
-</div>
-
-<script>
-/* =========================================
-DATA STRUCTURES & CURRICULUM
-========================================= */
-const APP_DATA_KEY = 'ict_apollo_emilia_data';
-
-let state = {
-isLoggedIn: false,
-progress: {}, // { 'm1l1': true }
-notes: {}, // { 'm1l1': "notes text" }
-quizScores: {}, // { 'm1': 100 }
-streak: 0,
-lastLogin: null,
-lastExport: null
-};
-
-// Note: Replace the youtube embed URLs with real ones later. Using placeholders to ensure layout works.
-const curriculum = [
-{
-id: 'm1', title: 'Module 1: Market Structure & Shifts', desc: 'The fundamental building blocks of price action.',
-lessons: [
-{ id: 'm1l1', title: 'Intro to Market Structure', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Understanding how price moves in trends. Markets are fractal and move in swings, creating Highs and Lows.', checklist: ['Identify Higher Highs (HH) & Higher Lows (HL)', 'Identify Lower Highs (LH) & Lower Lows (LL)', 'Understand the dealing range'] },
-{ id: 'm1l2', title: 'Break of Structure (BOS)', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'A Break of Structure occurs when price successfully pushes past a previous major high (in an uptrend) or low (in a downtrend), signaling trend continuation.', checklist: ['Requires candle body closure, not just a wick', 'Validates trend continuation', 'Leaves behind an Order Block usually'] },
-{ id: 'm1l3', title: 'Change of Character (CHoCH)', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'The first sign of a potential reversal. Occurs when an uptrend breaks its last Higher Low, or a downtrend breaks its last Lower High.', checklist: ['First shift in order flow', 'Different from a BOS (which is continuation)', 'Often occurs after a liquidity sweep'] }
-],
-quiz: [
-{ q: "What defines an uptrend?", options: ["Lower Highs and Lower Lows", "Higher Highs and Higher Lows", "Equal Highs and Higher Lows", "Consolidation"], a: 1 },
-{ q: "What validates a true Break of Structure (BOS)?", options: ["A wick pushing past the old high/low", "A body closure past the old high/low", "High volume on the breakout", "An immediate reversal"], a: 1 },
-{ q: "A Change of Character (CHoCH) signifies what?", options: ["Trend continuation", "A mitigation block", "The first sign of a trend reversal", "A time-based killzone"], a: 2 }
-]
-},
-{
-id: 'm2', title: 'Module 2: Liquidity Pools & Sweeps', desc: 'Where the money rests and why price seeks it.',
-lessons: [
-{ id: 'm2l1', title: 'Buy-Side & Sell-Side Liquidity', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Liquidity is where stop losses rest. Buy-Side Liquidity (BSL) rests above old highs. Sell-Side Liquidity (SSL) rests below old lows.', checklist: ['BSL = Buy stops from short sellers', 'SSL = Sell stops from long buyers', 'Price is drawn to liquidity like a magnet'] },
-{ id: 'm2l2', title: 'Equal Highs & Lows (EQH/EQL)', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Retail traders view equal highs/lows as "support and resistance". Smart money views them as high-density liquidity pools waiting to be engineered.', checklist: ['Identify Relative Equal Highs/Lows', 'Anticipate sweeps rather than bounces', 'Avoid trading traditional S/R breakouts'] },
-{ id: 'm2l3', title: 'Stop Hunts & Liquidity Sweeps', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'When price pierces a liquidity pool but fails to close beyond it (wick only), it is a sweep. Smart money is taking the stops to fuel a reversal.', checklist: ['Sweep = Wick through liquidity, body closes inside', 'Also known as Judas Swing', 'High probability setup when combined with CHoCH'] }
-],
-quiz: [
-{ q: "Where does Buy-Side Liquidity (BSL) rest?", options: ["Below old lows", "At the 50% equilibrium", "Above old highs", "Inside an Order Block"], a: 2 },
-{ q: "How does Smart Money view Equal Highs (EQH)?", options: ["Strong resistance to sell at", "A liquidity pool to sweep", "A Fair Value Gap", "A guaranteed breakout zone"], a: 1 },
-{ q: "A Stop Hunt / Liquidity Sweep is typically characterized by:", options: ["A strong body closure past the level", "A wick piercing the level and closing back inside", "Consolidation at the level", "A massive gap in price"], a: 1 }
-]
-},
-{
-id: 'm3', title: 'Module 3: Fair Value Gaps (FVG)', desc: 'Identifying market inefficiency and imbalances.',
-lessons: [
-{ id: 'm3l1', title: 'What is a Fair Value Gap?', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'A 3-candle pattern where the wick of the 1st candle and the wick of the 3rd candle do not overlap, leaving a gap in the 2nd candle. This is an imbalance.', checklist: ['Identify the 3-candle formation', 'Bullish FVG (BISI) vs Bearish FVG (SIBI)', 'Price naturally wants to return to fill the gap'] },
-{ id: 'm3l2', title: 'Consequent Encroachment (CE)', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'The exact 50% midpoint of a Fair Value Gap. It acts as a highly sensitive institutional reference point for price delivery.', checklist: ['Measure from FVG high to FVG low', 'Mark the 50% line', 'Watch for bodies respecting the CE'] },
-{ id: 'm3l3', title: 'FVG Mitigation & Inversions', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'When a FVG is filled and price reverses, it is mitigated. If price disrespects a FVG and closes through it strongly, it becomes an Inversion FVG (support turns resistance).', checklist: ['Mitigation = Price uses FVG and reverses', 'Inversion = Price fails FVG, closes through it', 'Inversions are powerful entry triggers'] }
-],
-quiz: [
-{ q: "A Fair Value Gap (FVG) consists of how many candles?", options: ["1", "2", "3", "4"], a: 2 },
-{ q: "What is Consequent Encroachment?", options: ["The 100% fill of a gap", "The 50% midpoint of a FVG", "When price ignores a gap", "A liquidity sweep"], a: 1 },
-{ q: "What happens when price disrespects a FVG and closes through it?", options: ["It becomes an Inversion FVG", "The trend is over", "It forms a Breaker Block", "It creates Equal Highs"], a: 0 }
-]
-},
-{
-id: 'm4', title: 'Module 4: Order Blocks & PD Arrays', desc: 'Institutional footprint identification.',
-lessons: [
-{ id: 'm4l1', title: 'Bullish & Bearish Order Blocks', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'An Order Block (OB) is the last down candle before an explosive up move (Bullish OB) or the last up candle before an explosive down move (Bearish OB) that breaks structure.', checklist: ['Must result in a BOS or CHoCH', 'Must leave behind a FVG (imbalance)', 'Price returns to mitigate the OB'] },
-{ id: 'm4l2', title: 'Breaker Blocks', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'A failed Order Block. When price sweeps liquidity, forms an OB, but then aggressively breaks back through it. The old OB becomes a Breaker.', checklist: ['Requires a liquidity sweep first', 'Price breaks through the OB that caused the sweep', 'High probability return to the Breaker'] },
-{ id: 'm4l3', title: 'PD Array Matrix Overview', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'The hierarchy of institutional reference points. Arranging Order Blocks, FVGs, Breakers, and Liquidity into a matrix to determine which level holds weight.', checklist: ['Understand Premium Arrays (Resistance)', 'Understand Discount Arrays (Support)', 'Combine arrays for confluence'] }
-],
-quiz: [
-{ q: "What validates an Order Block?", options: ["It must just be a large candle", "It must break structure and leave an imbalance (FVG)", "It must occur at 12:00 PM", "It must be an inside bar"], a: 1 },
-{ q: "A Breaker Block is essentially:", options: ["A new Fair Value Gap", "An equal high", "A failed Order Block after a liquidity sweep", "A consolidation zone"], a: 2 },
-{ q: "In the PD Array Matrix, Discount Arrays act as:", options: ["Resistance for shorting", "Take profit targets for shorts", "Institutional Support for buying", "Liquidity to be swept"], a: 2 }
-]
-},
-{
-id: 'm5', title: 'Module 5: Premium & Discount Zones', desc: 'Knowing where you are in the dealing range.',
-lessons: [
-{ id: 'm5l1', title: 'Defining the Dealing Range', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'The current working range defined by the most recent major swing high and swing low that resulted in a break of structure.', checklist: ['Find the Swing High', 'Find the Swing Low', 'Draw Fibonacci from wick to wick'] },
-{ id: 'm5l2', title: 'Equilibrium (50%)', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'The 50% mark of your dealing range. Smart money buys below 50% (Discount) and sells above 50% (Premium). Never buy in Premium or sell in Discount.', checklist: ['Above 50% = Premium (Expensive)', 'Below 50% = Discount (Cheap)', 'Wait for price to cross Equilibrium before entering'] },
-{ id: 'm5l3', title: 'Optimal Trade Entry (OTE)', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'The golden zone for entries. Located deep within Premium or Discount. Specifically the 62%, 70.5%, and 79% Fibonacci retracement levels.', checklist: ['Draw Fib from impulse swing', 'Identify the 62% - 79% zone', 'Look for OBs or FVGs resting inside the OTE'] }
-],
-quiz: [
-{ q: "Where should you look for long (buy) entries?", options: ["In Premium (>50%)", "At exactly 50%", "In Discount (<50%)", "Above the old high"], a: 2 },
-{ q: "What does Equilibrium represent in a dealing range?", options: ["The Optimal Trade Entry", "The 50% midpoint", "A Fair Value Gap", "A Stop Hunt"], a: 1 },
-{ q: "What are the standard Optimal Trade Entry (OTE) Fibonacci levels?", options: ["38.2%, 50%, 61.8%", "62%, 70.5%, 79%", "100%, 127%, 161%", "23.6%, 38.2%, 50%"], a: 1 }
-]
-},
-{
-id: 'm6', title: 'Module 6: Killzones & Time', desc: 'When to execute. Time is more important than price.',
-lessons: [
-{ id: 'm6l1', title: 'Macro vs Micro Time', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Algorithmic price delivery is tied to specific times of day. A perfect setup at the wrong time of day will fail.', checklist: ['Always use New York Local Time (EST)', 'Algorithms run on specific schedules', 'Avoid trading during dead zones (e.g. Asian session chop)'] },
-{ id: 'm6l2', title: 'London & NY Killzones', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'London Killzone (2AM - 5AM EST) often creates the High or Low of the day. New York Killzone (7AM - 10AM EST) provides continuation or reversal.', checklist: ['London: Look for fakeouts (Judas Swing)', 'NY: Look for alignment with HTF direction', 'Mark session open times on your chart'] },
-{ id: 'm6l3', title: 'The Silver Bullet', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'A specific time-based window where a high-probability FVG setup forms. Specifically 10AM-11AM, 2PM-3PM, and 3AM-4AM EST.', checklist: ['Identify the 1-hour window', 'Wait for a liquidity sweep', 'Enter on the FVG formation targeting opposite liquidity'] }
-],
-quiz: [
-{ q: "What timezone must you use for ICT concepts?", options: ["London (GMT)", "Tokyo (JST)", "New York (EST/EDT)", "Your local timezone"], a: 2 },
-{ q: "What typically happens during the London Killzone?", options: ["The market consolidates tightly", "It often forms the High or Low of the daily range", "It completely ignores HTF structure", "Volume dries up completely"], a: 1 },
-{ q: "Which of the following is a classic Silver Bullet window?", options: ["8AM - 9AM EST", "10AM - 11AM EST", "12PM - 1PM EST", "4PM - 5PM EST"], a: 1 }
-]
-},
-{
-id: 'm7', title: 'Module 7: Multi-Timeframe Analysis', desc: 'Top-down alignment for high probability.',
-lessons: [
-{ id: 'm7l1', title: 'Top-Down Framework', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Starting from the Weekly/Daily charts to find the overarching narrative, then dropping to H4/H1 for structure, and finally M15/M5 for execution.', checklist: ['Daily: Where is the Draw on Liquidity (DOL)?', 'H1: What is the current dealing range?', 'M5: Waiting for the CHoCH entry'] },
-{ id: 'm7l2', title: 'HTF Bias vs LTF Execution', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Your Higher Timeframe (HTF) bias dictates the direction you trade. If Daily is bullish, you only look for buys on the Lower Timeframe (LTF).', checklist: ['Never fight the Daily draw on liquidity', 'Use LTF premium/discount to enter in HTF direction', 'Patience to wait for LTF alignment'] },
-{ id: 'm7l3', title: 'Framing a Setup', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Putting it all together: Time + HTF Bias + Liquidity Sweep + LTF CHoCH + FVG Entry = A complete trade setup.', checklist: ['Check Time (Killzone)', 'Confirm HTF narrative', 'Wait for the execution pattern to form'] }
-],
-quiz: [
-{ q: "What is the primary purpose of the Daily chart?", options: ["To find exact entry points", "To determine the overarching Draw on Liquidity (Bias)", "To trade the Silver Bullet", "To hide the noise"], a: 1 },
-{ q: "If your Daily bias is heavily Bullish, what should you do on the 5-minute chart?", options: ["Look for short setups at resistance", "Look for buy setups in Discount arrays", "Buy blindly at market open", "Trade both directions"], a: 1 },
-{ q: "Which sequence correctly frames an ICT setup?", options: ["FVG -> Time -> Bias", "Time -> HTF Bias -> Sweep -> CHoCH -> Entry", "Entry -> Bias -> Time", "Sweep -> Entry (No matter the time)"], a: 1 }
-]
-},
-{
-id: 'm8', title: 'Module 8: Risk Management', desc: 'The math behind preserving capital and staying in the game.',
-lessons: [
-{ id: 'm8l1', title: 'Position Sizing & Risk per Trade', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Never risk more than 1-2% of your account on a single trade. In funding challenges, risk 0.25% to 0.5%. Capital preservation is priority #1.', checklist: ['Calculate risk before entering', 'Stop loss dictates lot size', 'Live to trade another day'] },
-{ id: 'm8l2', title: 'Reward to Risk (R:R)', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Your winners must be larger than your losers. A minimum of 1:2 R:R ensures you can be wrong 50% of the time and still be profitable.', checklist: ['Target logical liquidity pools', 'Do not force unrealistic R:R targets', 'Take partial profits at 1:1 or major hurdles'] },
-{ id: 'm8l3', title: 'Journaling & Psychology', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Trading is a battle against yourself. Documenting every trade (emotions, setup criteria, result) is how you build a statistical edge and confidence.', checklist: ['Screenshot entries and exits', 'Note the time of day and emotions', 'Review your journal weekly'] }
-],
-quiz: [
-{ q: "What is the maximum recommended risk per trade for a funded account?", options: ["5-10%", "2-3%", "0.25% to 1%", "Risk it all on a Silver Bullet"], a: 2 },
-{ q: "Why is a 1:2 or higher Risk:Reward ratio important?", options: ["It guarantees you win every trade", "It allows you to be profitable even with a 50% win rate", "It makes trades move faster", "It avoids slippage"], a: 1 },
-{ q: "What is the main purpose of a trading journal?", options: ["To show off on Twitter", "To mathematically prove your edge and fix behavioral errors", "To memorize candlestick patterns", "To track tax deductibles"], a: 1 }
-]
-}
-];
-
-/* =========================================
-STATE MANAGEMENT & INIT
-========================================= */
-function initApp() {
-const savedData = localStorage.getItem(APP_DATA_KEY);
-if (savedData) {
-state = { ...state, ...JSON.parse(savedData) };
-updateStreak();
-}
-
-if (state.isLoggedIn) {
-document.getElementById('login-view').classList.add('hidden');
-document.getElementById('app-view').classList.remove('hidden');
-nav('dashboard');
-}
-}
-
-function saveState() {
-localStorage.setItem(APP_DATA_KEY, JSON.stringify(state));
-updateDashboardStats();
-}
-
-function updateStreak() {
-const today = new Date().setHours(0,0,0,0);
-if (state.lastLogin) {
-const last = new Date(state.lastLogin).setHours(0,0,0,0);
-const diff = (today - last) / (1000 * 60 * 60 * 24);
-if (diff === 1) state.streak += 1;
-else if (diff > 1) state.streak = 1;
-} else {
-state.streak = 1;
-}
-state.lastLogin = Date.now();
-saveState();
-}
-
-function attemptLogin() {
-const u = document.getElementById('username').value;
-const p = document.getElementById('password').value;
-if (u.toLowerCase() === 'emilia' && p === 'ICTMentorship_Apollo') {
-state.isLoggedIn = true;
-updateStreak();
-document.getElementById('login-view').classList.add('hidden');
-document.getElementById('app-view').classList.remove('hidden');
-nav('dashboard');
-} else {
-document.getElementById('login-error').classList.remove('hidden');
-}
-}
-
-function logout() {
-state.isLoggedIn = false;
-saveState();
-location.reload();
-}
-
-/* =========================================
-NAVIGATION & ROUTING
-========================================= */
-let currentLesson = null;
-let currentQuizModule = null;
-
-function nav(view) {
-['dashboard', 'courses', 'lesson', 'quizzes', 'quiz-run', 'notes'].forEach(v => {
-document.getElementById(view-${v}).classList.add('hidden'); }); document.getElementById(view-${view}).classList.remove('hidden');
-
-if (view === 'dashboard') renderDashboard();
-if (view === 'courses') renderCourses();
-if (view === 'quizzes') renderQuizzesList();
-if (view === 'notes') renderAllNotes();
-}
-
-/* =========================================
-DASHBOARD
-========================================= */
-function updateDashboardStats() {
-document.getElementById('streak-counter').innerText = state.streak || 0;
-
-const totalLessons = curriculum.reduce((acc, mod) => acc + mod.lessons.length, 0);
-const completed = Object.keys(state.progress).length;
-const pct = Math.round((completed / totalLessons) * 100) || 0;
-document.getElementById('progress-percent').innerText = pct;
-
-const scores = Object.values(state.quizScores);
-const avg = scores.length ? Math.round(scores.reduce((a,b)=>a+b,0) / scores.length) : 0;
-document.getElementById('quiz-avg').innerText = avg;
-
-document.getElementById('last-export-date').innerText = state.lastExport ? new Date(state.lastExport).toLocaleString() : 'Never';
-}
-
-function renderDashboard() {
-updateDashboardStats();
-const feed = document.getElementById('activity-feed');
-feed.innerHTML = '';
-
-// Generate some dynamic recent activity based on state
-let activities = [];
-const completedLessons = Object.keys(state.progress);
-if (completedLessons.length > 0) {
-const last = completedLessons[completedLessons.length-1];
-activities.push(✅ Completed lesson: ${findLessonData(last).title}); } const quizzes = Object.keys(state.quizScores); if (quizzes.length &gt; 0) { const lastQ = quizzes[quizzes.length-1]; activities.push(🏆 Scored ${state.quizScores[lastQ]}% on Module ${lastQ.replace('m','')} Quiz); } if (state.lastExport) { activities.push(💾 Backed up data on ${new Date(state.lastExport).toLocaleDateString()});
-}
-
-if (activities.length === 0) {
-feed.innerHTML = '<li>No recent activity. Start studying!</li>';
-} else {
-activities.reverse().forEach(act => {
-feed.innerHTML += <li&gt;${act}</li>`;
-});
-}
-}
-
-/* =========================================
-COURSES & LESSONS
-========================================= */
-function renderCourses() {
-const container = document.getElementById('modules-container');
-container.innerHTML = '';
-
-curriculum.forEach(mod => {
-let modHtml = <div class="bg-ict-panel border border-ict-border rounded-xl p-6 mb-6"&gt; &lt;h3 class="text-xl font-bold text-white mb-2"&gt;${mod.title}</h3>
-<p class="text-sm text-gray-400 mb-4">${mod.desc}&lt;/p&gt; &lt;div class="space-y-2">;
-
-mod.lessons.forEach(less => {
-const isComp = state.progress[less.id];
-modHtml += &lt;div onclick="openLesson('${mod.id}', '{isComp ? 'border-ict-win' : 'border-ict-border'} hover:border-ict-pink cursor-pointer transition">
-<div class="flex items-center gap-3">
-<span class="text-xl">{less.title}</span>
-</div>
-</div>; }); modHtml +=</div></div>`;
-container.innerHTML += modHtml;
-});
-}
-
-function findLessonData(lessonId) {
-for (let m of curriculum) {
-for (let l of m.lessons) {
-if (l.id === lessonId) return l;
-}
-}
-return null;
-}
-
-function openLesson(modId, lessonId) {
-currentLesson = lessonId;
-const lesson = findLessonData(lessonId);
-if (!lesson) return;
-
-document.getElementById('lesson-title').innerText = lesson.title;
-document.getElementById('lesson-video').src = lesson.video;
-document.getElementById('lesson-desc').innerText = lesson.desc;
-
-const cl = document.getElementById('lesson-checklist');
-cl.innerHTML = lesson.checklist.map(item => <li&gt;${item}</li>`).join('');
-
-document.getElementById('lesson-notes').value = state.notes[lessonId] || '';
-
-updateCompleteButton();
-nav('lesson');
-}
-
-function updateCompleteButton() {
-const btn = document.getElementById('btn-complete');
-if (state.progress[currentLesson]) {
-btn.innerText = "Completed ✅";
-btn.className = "w-full py-3 rounded-xl font-bold transition border border-ict-win bg-ict-win/10 text-ict-win";
-} else {
-btn.innerText = "Mark as Complete";
-btn.className = "w-full py-3 rounded-xl font-bold transition border border-ict-border bg-ict-bg text-white hover:border-ict-pink";
-}
-}
-
-function toggleLessonComplete() {
-if (state.progress[currentLesson]) {
-delete state.progress[currentLesson];
-} else {
-state.progress[currentLesson] = true;
-}
-saveState();
-updateCompleteButton();
-}
-
-function saveNotes() {
-if (!currentLesson) return;
-const text = document.getElementById('lesson-notes').value;
-state.notes[currentLesson] = text;
-saveState();
-}
-
-/* =========================================
-QUIZZES
-========================================= */
-function renderQuizzesList() {
-const container = document.getElementById('quiz-list-container');
-container.innerHTML = '';
-
-curriculum.forEach(mod => {
-const score = state.quizScores[mod.id];
-let scoreDisplay = score !== undefined ? <span class="${score===100?'text-ict-win':'text-yellow-400'} font-bold">Best: ${score}%&lt;/span> : <span class="text-gray-500"&gt;Not attempted&lt;/span>;
-
-container.innerHTML += &lt;div class="bg-ict-panel border border-ict-border rounded-xl p-6 flex flex-col justify-between"&gt; &lt;div&gt; &lt;h3 class="text-lg font-bold text-white mb-2"&gt;${mod.title} Quiz</h3>
-<p class="text-sm text-gray-400 mb-4">Test your knowledge on {scoreDisplay}
-<button onclick="startQuiz('${mod.id}')" class="bg-ict-bg border border-ict-pink text-ict-pink px-4 py-2 rounded hover:bg-ict-pink hover:text-white transition"&gt;Start Quiz&lt;/button&gt; &lt;/div&gt; &lt;/div>;
-});
-}
-
-function startQuiz(modId) {
-currentQuizModule = modId;
-const mod = curriculum.find(m => m.id === modId);
-document.getElementById('active-quiz-title').innerText = ``${mod.title} - Quiz`;
-
-const qContainer = document.getElementById('quiz-questions-container');
-qContainer.innerHTML = '';
-document.getElementById('quiz-results').classList.add('hidden');
-
-mod.quiz.forEach((q, index) => {
-let optionsHtml = q.options.map((opt, i) => &lt;label class="block p-3 rounded border border-ict-border bg-ict-bg cursor-pointer hover:border-ict-pink transition mb-2 flex items-center gap-3"&gt; &lt;input type="radio" name="q${index}" value="${i}" class="accent-ict-pink w-4 h-4" required&gt; &lt;span class="text-white text-sm"&gt;${opt}</span>
-</label>
-`).join('');
-
-qContainer.innerHTML += &lt;div&gt; &lt;p class="text-white font-bold mb-3"&gt;${index + 1}. {optionsHtml}
-</div>
-`;
-});
-
-nav('quiz-run');
-}
-
-function submitQuiz(e) {
-e.preventDefault();
-const mod = curriculum.find(m => m.id === currentQuizModule);
-const formData = new FormData(e.target);
-let correct = 0;
-
-mod.quiz.forEach((q, index) => {
-const answer = parseInt(formData.get(q${index}`));
-if (answer === q.a) correct++;
-});
-
-const score = Math.round((correct / mod.quiz.length) * 100);
-
-// Update high score
-if (!state.quizScores[currentQuizModule] || score > state.quizScores[currentQuizModule]) {
-state.quizScores[currentQuizModule] = score;
-saveState();
-}
-
-const resDiv = document.getElementById('quiz-results');
-resDiv.classList.remove('hidden');
-if (score === 100) {
-resDiv.className = "mt-6 p-4 rounded border border-ict-win bg-ict-win/10 text-ict-win text-center font-bold text-lg";
-resDiv.innerText = Score: 100% - Flawless! Check your reward!;
-triggerCelebration(currentQuizModule);
-} else {
-resDiv.className = "mt-6 p-4 rounded border border-yellow-500 bg-yellow-500/10 text-yellow-500 text-center font-bold text-lg";
-resDiv.innerText = Score:${score}%. Review the material and try again to get 100%!`;
-}
-}
-
-function triggerCelebration(modId) {
-document.getElementById('celebration-modal').classList.remove('hidden');
-try {
-// Ensure audio files are named m1_passed.mp3, m2_passed.mp3, etc. in /public/audio/
-let audio = new Audio(./public/audio/${modId}_passed.mp3`);
-audio.play().catch(e => console.log("Audio play failed (maybe missing file):", e));
-} catch (e) { console.error(e); }
-}
-
-function closeModal() {
-document.getElementById('celebration-modal').classList.add('hidden');
-nav('quizzes');
-}
-
-/* =========================================
-NOTES SYSTEM
-========================================= */
-function renderAllNotes() {
-const query = document.getElementById('note-search').value.toLowerCase();
-const container = document.getElementById('all-notes-container');
-container.innerHTML = '';
-
-let found = false;
-for (let lessonId in state.notes) {
-const text = state.notes[lessonId];
-if (text && text.trim() !== '') {
-if (query && !text.toLowerCase().includes(query)) continue;
-
-const lesson = findLessonData(lessonId);
-if (!lesson) continue;
-
-found = true;
-container.innerHTML += &lt;div class="bg-ict-panel border border-ict-border p-4 rounded-xl"&gt; &lt;div class="flex justify-between items-center mb-2"&gt; &lt;h4 class="font-bold text-ict-pink"&gt;${lesson.title}</h4>
-<button onclick="openLesson('{lessonId}')" class="text-xs text-gray-400 hover:text-white underline">Go to lesson</button>
-</div>
-<p class="text-sm text-gray-300 whitespace-pre-wrap">${text}</p>
-</div>
-`;
-}
-}
-if (!found) {
-container.innerHTML = '<p class="text-gray-500 italic">No notes found. Start typing in a lesson!</p>';
-}
-}
-
-/* =========================================
-DATA SYNC (EXPORT/IMPORT)
-========================================= */
-function exportData() {
-state.lastExport = Date.now();
-saveState(); // save the timestamp
-
-const dataStr = JSON.stringify(state);
-const blob = new Blob([dataStr], { type: "application/json" });
-const url = URL.createObjectURL(blob);
-
-const a = document.createElement('a');
-a.href = url;
-a.download = 'emilia-progress-backup.json';
-document.body.appendChild(a);
-a.click();
-document.body.removeChild(a);
-URL.revokeObjectURL(url);
-
-renderDashboard(); // refresh dashboard to show new export date
-}
-
-function importData(event) {
-const file = event.target.files[0];
-if (!file) return;
-
-const reader = new FileReader();
-reader.onload = function(e) {
-try {
-const importedState = JSON.parse(e.target.result);
-if (importedState && typeof importedState === 'object') {
-state = { ...state, ...importedState };
-saveState();
-alert("Progress imported successfully! Reloading...");
-location.reload();
-}
-} catch (err) {
-alert("Error reading backup file. Make sure it's the correct JSON file.");
-}
-};
-reader.readAsText(file);
-}
-
-// Boot
-window.onload = initApp;
-</script>
+    <div id="login-view" class="fixed inset-0 z-50 flex items-center justify-center bg-ict-bg fade-in">
+        <div class="bg-ict-panel border border-ict-border p-8 rounded-xl shadow-2xl w-full max-w-md text-center mx-4">
+            <h1 class="text-3xl font-bold text-white mb-2">Welcome Emilia ❤️</h1>
+            <p class="text-sm text-gray-400 mb-6">Enter your credentials to access the terminal.</p>
+            
+            <form onsubmit="attemptLogin(event)">
+                <input type="text" id="username" placeholder="Username" class="w-full bg-ict-bg border border-ict-border rounded px-4 py-3 mb-4 text-white focus:outline-none focus:border-ict-pink" required>
+                <input type="password" id="password" placeholder="Password" class="w-full bg-ict-bg border border-ict-border rounded px-4 py-3 mb-4 text-white focus:outline-none focus:border-ict-pink" required>
+                
+                <div class="flex items-center justify-start mb-6">
+                    <label class="flex items-center gap-2 text-sm text-gray-300 cursor-pointer hover:text-white transition">
+                        <input type="checkbox" id="remember-me">
+                        Remember me on this device
+                    </label>
+                </div>
+                
+                <button type="submit" class="w-full bg-ict-pink hover:bg-ict-pinkHover text-white font-bold py-3 px-4 rounded transition">Login</button>
+            </form>
+            <p id="login-error" class="text-red-400 text-sm mt-4 hidden">Invalid credentials. Try again.</p>
+        </div>
+    </div>
+
+    <div id="app-view" class="hidden flex h-full w-full">
+        <aside class="w-64 bg-ict-panel border-r border-ict-border flex flex-col h-full shrink-0">
+            <div class="p-6 border-b border-ict-border">
+                <h2 class="text-xl font-bold text-white tracking-wider flex items-center gap-2">
+                    <span class="text-ict-pink">ICT</span> APOLLO
+                </h2>
+            </div>
+            <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+                <button onclick="nav('dashboard')" class="w-full text-left px-4 py-2 rounded hover:bg-ict-border hover:text-white transition">Dashboard & Sync</button>
+                <button onclick="nav('courses')" class="w-full text-left px-4 py-2 rounded hover:bg-ict-border hover:text-white transition">Curriculum</button>
+                <button onclick="nav('quizzes')" class="w-full text-left px-4 py-2 rounded hover:bg-ict-border hover:text-white transition">Quizzes</button>
+                <button onclick="nav('notes')" class="w-full text-left px-4 py-2 rounded hover:bg-ict-border hover:text-white transition">Study Notes</button>
+            </nav>
+            <div class="p-4 border-t border-ict-border text-xs text-center text-gray-500">
+                <p>Made by your baby Mustafa 🩷</p>
+                <button onclick="logout()" class="mt-2 text-ict-pink hover:underline font-bold">Logout</button>
+            </div>
+        </aside>
+
+        <main class="flex-1 h-full overflow-y-auto p-4 md:p-8 relative" id="main-content">
+            
+            <div id="view-dashboard" class="fade-in hidden">
+                <h2 class="text-3xl font-bold text-white mb-6">Your Dashboard</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-ict-panel border border-ict-border p-6 rounded-xl">
+                        <p class="text-gray-400 text-sm">Study Streak</p>
+                        <p class="text-4xl font-bold text-ict-pink mt-2"><span id="streak-counter">0</span> Days 🔥</p>
+                    </div>
+                    <div class="bg-ict-panel border border-ict-border p-6 rounded-xl">
+                        <p class="text-gray-400 text-sm">Course Progress</p>
+                        <p class="text-4xl font-bold text-white mt-2"><span id="progress-percent">0</span>%</p>
+                    </div>
+                    <div class="bg-ict-panel border border-ict-border p-6 rounded-xl">
+                        <p class="text-gray-400 text-sm">Quiz Average</p>
+                        <p class="text-4xl font-bold text-ict-win mt-2"><span id="quiz-avg">0</span>%</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-ict-panel border border-ict-border p-6 rounded-xl">
+                        <h3 class="text-xl font-bold text-white mb-4">Cross-Device Sync</h3>
+                        <p class="text-sm text-gray-400 mb-4">Your progress lives in this browser. To continue on your phone or another computer, export your data and import it there.</p>
+                        <p class="text-xs text-ict-pink mb-4">Last Export: <span id="last-export-date">Never</span></p>
+                        
+                        <div class="flex gap-4">
+                            <button onclick="exportData()" class="flex-1 bg-ict-border hover:bg-gray-700 text-white py-2 rounded text-sm transition">⬇️ Export</button>
+                            <label class="flex-1 bg-ict-border hover:bg-gray-700 text-white py-2 rounded text-sm transition cursor-pointer text-center">
+                                ⬆️ Import
+                                <input type="file" class="hidden" accept=".json" onchange="importData(event)">
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-ict-panel border border-ict-border p-6 rounded-xl">
+                        <h3 class="text-xl font-bold text-white mb-4">Recent Activity</h3>
+                        <ul id="activity-feed" class="space-y-3 text-sm text-gray-400">
+                            </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-courses" class="hidden fade-in">
+                <h2 class="text-3xl font-bold text-white mb-6">Curriculum</h2>
+                <div id="modules-container" class="space-y-4">
+                    </div>
+            </div>
+
+            <div id="view-lesson" class="hidden fade-in">
+                <button onclick="nav('courses')" class="text-ict-pink hover:underline mb-4">← Back to Curriculum</button>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2">
+                        <h2 id="lesson-title" class="text-2xl font-bold text-white mb-2">Lesson Title</h2>
+                        <div class="aspect-video bg-black rounded-xl overflow-hidden border border-ict-border mb-4">
+                            <iframe id="lesson-video" class="w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div class="bg-ict-panel border border-ict-border p-6 rounded-xl mb-4">
+                            <h3 class="text-lg font-bold text-white mb-2">Concept Breakdown</h3>
+                            <p id="lesson-desc" class="text-gray-300 text-sm leading-relaxed mb-4"></p>
+                            <h4 class="font-bold text-white mb-2">Key Takeaways:</h4>
+                            <ul id="lesson-checklist" class="list-disc pl-5 text-sm text-gray-300 space-y-1"></ul>
+                        </div>
+                        <button id="btn-complete" onclick="toggleLessonComplete()" class="w-full py-3 rounded-xl font-bold transition border border-ict-border"></button>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-4">Study Notes</h3>
+                        <textarea id="lesson-notes" oninput="saveNotes()" class="w-full h-[300px] lg:h-[500px] bg-ict-panel border border-ict-border rounded-xl p-4 text-gray-300 focus:outline-none focus:border-ict-pink resize-none" placeholder="Type your notes for this lesson here... They auto-save."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-quizzes" class="hidden fade-in">
+                <h2 class="text-3xl font-bold text-white mb-6">Knowledge Check</h2>
+                <div class="bg-blue-900/20 border border-blue-900/50 p-4 rounded-xl mb-6 text-sm text-blue-200">
+                    Get 100% on a quiz to unlock a special message from Mustafa! Complete the lessons in the module before attempting.
+                </div>
+                <div id="quiz-list-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    </div>
+            </div>
+
+            <div id="view-quiz-run" class="hidden fade-in max-w-3xl mx-auto">
+                <button onclick="nav('quizzes')" class="text-ict-pink hover:underline mb-4">← Abandon Quiz</button>
+                <div class="bg-ict-panel border border-ict-border p-6 md:p-8 rounded-xl">
+                    <h2 id="active-quiz-title" class="text-2xl font-bold text-white mb-6">Quiz</h2>
+                    <form id="quiz-form" onsubmit="submitQuiz(event)">
+                        <div id="quiz-questions-container" class="space-y-8 mb-8">
+                            </div>
+                        <button type="submit" class="w-full bg-ict-pink hover:bg-ict-pinkHover text-white font-bold py-3 rounded transition">Submit Answers</button>
+                    </form>
+                    <div id="quiz-results" class="hidden mt-6 p-4 rounded border text-center font-bold text-lg"></div>
+                </div>
+            </div>
+
+            <div id="view-notes" class="hidden fade-in">
+                <h2 class="text-3xl font-bold text-white mb-6">Global Study Notes</h2>
+                <input type="text" id="note-search" placeholder="Search your notes by keyword..." oninput="renderAllNotes()" class="w-full bg-ict-panel border border-ict-border rounded px-4 py-3 mb-6 text-white focus:outline-none focus:border-ict-pink">
+                <div id="all-notes-container" class="space-y-4">
+                    </div>
+            </div>
+
+        </main>
+    </div>
+
+    <div id="celebration-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm fade-in">
+        <div class="bg-ict-panel border border-ict-pink p-10 rounded-2xl shadow-[0_0_50px_-12px_rgba(255,102,178,0.5)] text-center max-w-md w-full mx-4 relative">
+            <div class="text-6xl mb-4">🎉</div>
+            <h2 class="text-3xl font-bold text-ict-pink mb-4">Flawless Victory!</h2>
+            <p class="text-xl text-white font-medium mb-6">"Proud of you, baby! 🩷"</p>
+            <p class="text-sm text-gray-400 mb-8">Playing your reward audio...</p>
+            <button onclick="closeModal()" class="w-full bg-ict-border hover:bg-gray-700 text-white font-bold py-3 rounded transition">Close</button>
+        </div>
+    </div>
+
+    <script>
+        /* =========================================
+           DATA STRUCTURES & CURRICULUM
+           ========================================= */
+        const APP_DATA_KEY = 'ict_apollo_emilia_data';
+        
+        let state = {
+            isLoggedIn: false,
+            rememberMe: false, // New flag for saving password
+            progress: {}, 
+            notes: {},    
+            quizScores: {}, 
+            streak: 0,
+            lastLogin: null,
+            lastExport: null
+        };
+
+        const curriculum = [
+            {
+                id: 'm1', title: 'Module 1: Market Structure & Shifts', desc: 'The fundamental building blocks of price action.',
+                lessons: [
+                    { id: 'm1l1', title: 'Intro to Market Structure', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Understanding how price moves in trends. Markets are fractal and move in swings, creating Highs and Lows.', checklist: ['Identify Higher Highs (HH) & Higher Lows (HL)', 'Identify Lower Highs (LH) & Lower Lows (LL)', 'Understand the dealing range'] },
+                    { id: 'm1l2', title: 'Break of Structure (BOS)', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'A Break of Structure occurs when price successfully pushes past a previous major high (in an uptrend) or low (in a downtrend), signaling trend continuation.', checklist: ['Requires candle body closure, not just a wick', 'Validates trend continuation', 'Leaves behind an Order Block usually'] },
+                    { id: 'm1l3', title: 'Change of Character (CHoCH)', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'The first sign of a potential reversal. Occurs when an uptrend breaks its last Higher Low, or a downtrend breaks its last Lower High.', checklist: ['First shift in order flow', 'Different from a BOS (which is continuation)', 'Often occurs after a liquidity sweep'] }
+                ],
+                quiz: [
+                    { q: "What defines an uptrend?", options: ["Lower Highs and Lower Lows", "Higher Highs and Higher Lows", "Equal Highs and Higher Lows", "Consolidation"], a: 1 },
+                    { q: "What validates a true Break of Structure (BOS)?", options: ["A wick pushing past the old high/low", "A body closure past the old high/low", "High volume on the breakout", "An immediate reversal"], a: 1 },
+                    { q: "A Change of Character (CHoCH) signifies what?", options: ["Trend continuation", "A mitigation block", "The first sign of a trend reversal", "A time-based killzone"], a: 2 }
+                ]
+            },
+            {
+                id: 'm2', title: 'Module 2: Liquidity Pools & Sweeps', desc: 'Where the money rests and why price seeks it.',
+                lessons: [
+                    { id: 'm2l1', title: 'Buy-Side & Sell-Side Liquidity', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Liquidity is where stop losses rest. Buy-Side Liquidity (BSL) rests above old highs. Sell-Side Liquidity (SSL) rests below old lows.', checklist: ['BSL = Buy stops from short sellers', 'SSL = Sell stops from long buyers', 'Price is drawn to liquidity like a magnet'] },
+                    { id: 'm2l2', title: 'Equal Highs & Lows (EQH/EQL)', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Retail traders view equal highs/lows as "support and resistance". Smart money views them as high-density liquidity pools waiting to be engineered.', checklist: ['Identify Relative Equal Highs/Lows', 'Anticipate sweeps rather than bounces', 'Avoid trading traditional S/R breakouts'] },
+                    { id: 'm2l3', title: 'Stop Hunts & Liquidity Sweeps', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'When price pierces a liquidity pool but fails to close beyond it (wick only), it is a sweep. Smart money is taking the stops to fuel a reversal.', checklist: ['Sweep = Wick through liquidity, body closes inside', 'Also known as Judas Swing', 'High probability setup when combined with CHoCH'] }
+                ],
+                quiz: [
+                    { q: "Where does Buy-Side Liquidity (BSL) rest?", options: ["Below old lows", "At the 50% equilibrium", "Above old highs", "Inside an Order Block"], a: 2 },
+                    { q: "How does Smart Money view Equal Highs (EQH)?", options: ["Strong resistance to sell at", "A liquidity pool to sweep", "A Fair Value Gap", "A guaranteed breakout zone"], a: 1 },
+                    { q: "A Stop Hunt / Liquidity Sweep is typically characterized by:", options: ["A strong body closure past the level", "A wick piercing the level and closing back inside", "Consolidation at the level", "A massive gap in price"], a: 1 }
+                ]
+            },
+            {
+                id: 'm3', title: 'Module 3: Fair Value Gaps (FVG)', desc: 'Identifying market inefficiency and imbalances.',
+                lessons: [
+                    { id: 'm3l1', title: 'What is a Fair Value Gap?', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'A 3-candle pattern where the wick of the 1st candle and the wick of the 3rd candle do not overlap, leaving a gap in the 2nd candle. This is an imbalance.', checklist: ['Identify the 3-candle formation', 'Bullish FVG (BISI) vs Bearish FVG (SIBI)', 'Price naturally wants to return to fill the gap'] },
+                    { id: 'm3l2', title: 'Consequent Encroachment (CE)', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'The exact 50% midpoint of a Fair Value Gap. It acts as a highly sensitive institutional reference point for price delivery.', checklist: ['Measure from FVG high to FVG low', 'Mark the 50% line', 'Watch for bodies respecting the CE'] },
+                    { id: 'm3l3', title: 'FVG Mitigation & Inversions', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'When a FVG is filled and price reverses, it is mitigated. If price disrespects a FVG and closes through it strongly, it becomes an Inversion FVG (support turns resistance).', checklist: ['Mitigation = Price uses FVG and reverses', 'Inversion = Price fails FVG, closes through it', 'Inversions are powerful entry triggers'] }
+                ],
+                quiz: [
+                    { q: "A Fair Value Gap (FVG) consists of how many candles?", options: ["1", "2", "3", "4"], a: 2 },
+                    { q: "What is Consequent Encroachment?", options: ["The 100% fill of a gap", "The 50% midpoint of a FVG", "When price ignores a gap", "A liquidity sweep"], a: 1 },
+                    { q: "What happens when price disrespects a FVG and closes through it?", options: ["It becomes an Inversion FVG", "The trend is over", "It forms a Breaker Block", "It creates Equal Highs"], a: 0 }
+                ]
+            },
+            {
+                id: 'm4', title: 'Module 4: Order Blocks & PD Arrays', desc: 'Institutional footprint identification.',
+                lessons: [
+                    { id: 'm4l1', title: 'Bullish & Bearish Order Blocks', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'An Order Block (OB) is the last down candle before an explosive up move (Bullish OB) or the last up candle before an explosive down move (Bearish OB) that breaks structure.', checklist: ['Must result in a BOS or CHoCH', 'Must leave behind a FVG (imbalance)', 'Price returns to mitigate the OB'] },
+                    { id: 'm4l2', title: 'Breaker Blocks', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'A failed Order Block. When price sweeps liquidity, forms an OB, but then aggressively breaks back through it. The old OB becomes a Breaker.', checklist: ['Requires a liquidity sweep first', 'Price breaks through the OB that caused the sweep', 'High probability return to the Breaker'] },
+                    { id: 'm4l3', title: 'PD Array Matrix Overview', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'The hierarchy of institutional reference points. Arranging Order Blocks, FVGs, Breakers, and Liquidity into a matrix to determine which level holds weight.', checklist: ['Understand Premium Arrays (Resistance)', 'Understand Discount Arrays (Support)', 'Combine arrays for confluence'] }
+                ],
+                quiz: [
+                    { q: "What validates an Order Block?", options: ["It must just be a large candle", "It must break structure and leave an imbalance (FVG)", "It must occur at 12:00 PM", "It must be an inside bar"], a: 1 },
+                    { q: "A Breaker Block is essentially:", options: ["A new Fair Value Gap", "An equal high", "A failed Order Block after a liquidity sweep", "A consolidation zone"], a: 2 },
+                    { q: "In the PD Array Matrix, Discount Arrays act as:", options: ["Resistance for shorting", "Take profit targets for shorts", "Institutional Support for buying", "Liquidity to be swept"], a: 2 }
+                ]
+            },
+            {
+                id: 'm5', title: 'Module 5: Premium & Discount Zones', desc: 'Knowing where you are in the dealing range.',
+                lessons: [
+                    { id: 'm5l1', title: 'Defining the Dealing Range', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'The current working range defined by the most recent major swing high and swing low that resulted in a break of structure.', checklist: ['Find the Swing High', 'Find the Swing Low', 'Draw Fibonacci from wick to wick'] },
+                    { id: 'm5l2', title: 'Equilibrium (50%)', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'The 50% mark of your dealing range. Smart money buys below 50% (Discount) and sells above 50% (Premium). Never buy in Premium or sell in Discount.', checklist: ['Above 50% = Premium (Expensive)', 'Below 50% = Discount (Cheap)', 'Wait for price to cross Equilibrium before entering'] },
+                    { id: 'm5l3', title: 'Optimal Trade Entry (OTE)', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'The golden zone for entries. Located deep within Premium or Discount. Specifically the 62%, 70.5%, and 79% Fibonacci retracement levels.', checklist: ['Draw Fib from impulse swing', 'Identify the 62% - 79% zone', 'Look for OBs or FVGs resting inside the OTE'] }
+                ],
+                quiz: [
+                    { q: "Where should you look for long (buy) entries?", options: ["In Premium (>50%)", "At exactly 50%", "In Discount (<50%)", "Above the old high"], a: 2 },
+                    { q: "What does Equilibrium represent in a dealing range?", options: ["The Optimal Trade Entry", "The 50% midpoint", "A Fair Value Gap", "A Stop Hunt"], a: 1 },
+                    { q: "What are the standard Optimal Trade Entry (OTE) Fibonacci levels?", options: ["38.2%, 50%, 61.8%", "62%, 70.5%, 79%", "100%, 127%, 161%", "23.6%, 38.2%, 50%"], a: 1 }
+                ]
+            },
+            {
+                id: 'm6', title: 'Module 6: Killzones & Time', desc: 'When to execute. Time is more important than price.',
+                lessons: [
+                    { id: 'm6l1', title: 'Macro vs Micro Time', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Algorithmic price delivery is tied to specific times of day. A perfect setup at the wrong time of day will fail.', checklist: ['Always use New York Local Time (EST)', 'Algorithms run on specific schedules', 'Avoid trading during dead zones (e.g. Asian session chop)'] },
+                    { id: 'm6l2', title: 'London & NY Killzones', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'London Killzone (2AM - 5AM EST) often creates the High or Low of the day. New York Killzone (7AM - 10AM EST) provides continuation or reversal.', checklist: ['London: Look for fakeouts (Judas Swing)', 'NY: Look for alignment with HTF direction', 'Mark session open times on your chart'] },
+                    { id: 'm6l3', title: 'The Silver Bullet', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'A specific time-based window where a high-probability FVG setup forms. Specifically 10AM-11AM, 2PM-3PM, and 3AM-4AM EST.', checklist: ['Identify the 1-hour window', 'Wait for a liquidity sweep', 'Enter on the FVG formation targeting opposite liquidity'] }
+                ],
+                quiz: [
+                    { q: "What timezone must you use for ICT concepts?", options: ["London (GMT)", "Tokyo (JST)", "New York (EST/EDT)", "Your local timezone"], a: 2 },
+                    { q: "What typically happens during the London Killzone?", options: ["The market consolidates tightly", "It often forms the High or Low of the daily range", "It completely ignores HTF structure", "Volume dries up completely"], a: 1 },
+                    { q: "Which of the following is a classic Silver Bullet window?", options: ["8AM - 9AM EST", "10AM - 11AM EST", "12PM - 1PM EST", "4PM - 5PM EST"], a: 1 }
+                ]
+            },
+            {
+                id: 'm7', title: 'Module 7: Multi-Timeframe Analysis', desc: 'Top-down alignment for high probability.',
+                lessons: [
+                    { id: 'm7l1', title: 'Top-Down Framework', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Starting from the Weekly/Daily charts to find the overarching narrative, then dropping to H4/H1 for structure, and finally M15/M5 for execution.', checklist: ['Daily: Where is the Draw on Liquidity (DOL)?', 'H1: What is the current dealing range?', 'M5: Waiting for the CHoCH entry'] },
+                    { id: 'm7l2', title: 'HTF Bias vs LTF Execution', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Your Higher Timeframe (HTF) bias dictates the direction you trade. If Daily is bullish, you only look for buys on the Lower Timeframe (LTF).', checklist: ['Never fight the Daily draw on liquidity', 'Use LTF premium/discount to enter in HTF direction', 'Patience to wait for LTF alignment'] },
+                    { id: 'm7l3', title: 'Framing a Setup', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Putting it all together: Time + HTF Bias + Liquidity Sweep + LTF CHoCH + FVG Entry = A complete trade setup.', checklist: ['Check Time (Killzone)', 'Confirm HTF narrative', 'Wait for the execution pattern to form'] }
+                ],
+                quiz: [
+                    { q: "What is the primary purpose of the Daily chart?", options: ["To find exact entry points", "To determine the overarching Draw on Liquidity (Bias)", "To trade the Silver Bullet", "To hide the noise"], a: 1 },
+                    { q: "If your Daily bias is heavily Bullish, what should you do on the 5-minute chart?", options: ["Look for short setups at resistance", "Look for buy setups in Discount arrays", "Buy blindly at market open", "Trade both directions"], a: 1 },
+                    { q: "Which sequence correctly frames an ICT setup?", options: ["FVG -> Time -> Bias", "Time -> HTF Bias -> Sweep -> CHoCH -> Entry", "Entry -> Bias -> Time", "Sweep -> Entry (No matter the time)"], a: 1 }
+                ]
+            },
+            {
+                id: 'm8', title: 'Module 8: Risk Management', desc: 'The math behind preserving capital and staying in the game.',
+                lessons: [
+                    { id: 'm8l1', title: 'Position Sizing & Risk per Trade', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Never risk more than 1-2% of your account on a single trade. In funding challenges, risk 0.25% to 0.5%. Capital preservation is priority #1.', checklist: ['Calculate risk before entering', 'Stop loss dictates lot size', 'Live to trade another day'] },
+                    { id: 'm8l2', title: 'Reward to Risk (R:R)', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Your winners must be larger than your losers. A minimum of 1:2 R:R ensures you can be wrong 50% of the time and still be profitable.', checklist: ['Target logical liquidity pools', 'Do not force unrealistic R:R targets', 'Take partial profits at 1:1 or major hurdles'] },
+                    { id: 'm8l3', title: 'Journaling & Psychology', video: 'https://www.youtube.com/embed/P2Xg4g90t3w', desc: 'Trading is a battle against yourself. Documenting every trade (emotions, setup criteria, result) is how you build a statistical edge and confidence.', checklist: ['Screenshot entries and exits', 'Note the time of day and emotions', 'Review your journal weekly'] }
+                ],
+                quiz: [
+                    { q: "What is the maximum recommended risk per trade for a funded account?", options: ["5-10%", "2-3%", "0.25% to 1%", "Risk it all on a Silver Bullet"], a: 2 },
+                    { q: "Why is a 1:2 or higher Risk:Reward ratio important?", options: ["It guarantees you win every trade", "It allows you to be profitable even with a 50% win rate", "It makes trades move faster", "It avoids slippage"], a: 1 },
+                    { q: "What is the main purpose of a trading journal?", options: ["To show off on Twitter", "To mathematically prove your edge and fix behavioral errors", "To memorize candlestick patterns", "To track tax deductibles"], a: 1 }
+                ]
+            }
+        ];
+
+        /* =========================================
+           STATE MANAGEMENT & INIT
+           ========================================= */
+        function initApp() {
+            const savedData = localStorage.getItem(APP_DATA_KEY);
+            if (savedData) {
+                const parsed = JSON.parse(savedData);
+                state = { ...state, ...parsed };
+                
+                // If they previously logged in but DID NOT check "remember me", log them out on refresh
+                if (state.isLoggedIn && !state.rememberMe) {
+                    state.isLoggedIn = false;
+                }
+            }
+
+            if (state.isLoggedIn) {
+                updateStreak(); // Save streak on valid load
+                document.getElementById('login-view').classList.add('hidden');
+                document.getElementById('app-view').classList.remove('hidden');
+                nav('dashboard');
+            }
+        }
+
+        function saveState() {
+            localStorage.setItem(APP_DATA_KEY, JSON.stringify(state));
+            updateDashboardStats();
+        }
+
+        function updateStreak() {
+            const today = new Date().setHours(0,0,0,0);
+            if (state.lastLogin) {
+                const last = new Date(state.lastLogin).setHours(0,0,0,0);
+                const diff = (today - last) / (1000 * 60 * 60 * 24);
+                if (diff === 1) state.streak += 1;
+                else if (diff > 1) state.streak = 1;
+            } else {
+                state.streak = 1;
+            }
+            state.lastLogin = Date.now();
+            saveState();
+        }
+
+        // Changed to take event 'e' to prevent form default reload
+        function attemptLogin(e) {
+            e.preventDefault(); 
+            const u = document.getElementById('username').value.trim();
+            const p = document.getElementById('password').value.trim();
+            const remember = document.getElementById('remember-me').checked;
+
+            if (u.toLowerCase() === 'emilia' && p === 'ICTMentorship_Apollo') {
+                state.isLoggedIn = true;
+                state.rememberMe = remember;
+                updateStreak();
+                
+                document.getElementById('login-view').classList.add('hidden');
+                document.getElementById('app-view').classList.remove('hidden');
+                document.getElementById('login-error').classList.add('hidden');
+                nav('dashboard');
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        }
+
+        function logout() {
+            state.isLoggedIn = false;
+            state.rememberMe = false;
+            saveState();
+            location.reload();
+        }
+
+        /* =========================================
+           NAVIGATION & ROUTING
+           ========================================= */
+        let currentLesson = null;
+        let currentQuizModule = null;
+
+        function nav(view) {
+            ['dashboard', 'courses', 'lesson', 'quizzes', 'quiz-run', 'notes'].forEach(v => {
+                document.getElementById(`view-${v}`).classList.add('hidden');
+            });
+            document.getElementById(`view-${view}`).classList.remove('hidden');
+
+            if (view === 'dashboard') renderDashboard();
+            if (view === 'courses') renderCourses();
+            if (view === 'quizzes') renderQuizzesList();
+            if (view === 'notes') renderAllNotes();
+        }
+
+        /* =========================================
+           DASHBOARD
+           ========================================= */
+        function updateDashboardStats() {
+            document.getElementById('streak-counter').innerText = state.streak || 0;
+            
+            const totalLessons = curriculum.reduce((acc, mod) => acc + mod.lessons.length, 0);
+            const completed = Object.keys(state.progress).length;
+            const pct = Math.round((completed / totalLessons) * 100) || 0;
+            document.getElementById('progress-percent').innerText = pct;
+
+            const scores = Object.values(state.quizScores);
+            const avg = scores.length ? Math.round(scores.reduce((a,b)=>a+b,0) / scores.length) : 0;
+            document.getElementById('quiz-avg').innerText = avg;
+
+            document.getElementById('last-export-date').innerText = state.lastExport ? new Date(state.lastExport).toLocaleString() : 'Never';
+        }
+
+        function renderDashboard() {
+            updateDashboardStats();
+            const feed = document.getElementById('activity-feed');
+            feed.innerHTML = '';
+            
+            let activities = [];
+            const completedLessons = Object.keys(state.progress);
+            if (completedLessons.length > 0) {
+                const last = completedLessons[completedLessons.length-1];
+                const lastData = findLessonData(last);
+                if (lastData) activities.push(`✅ Completed lesson: ${lastData.title}`);
+            }
+            const quizzes = Object.keys(state.quizScores);
+            if (quizzes.length > 0) {
+                const lastQ = quizzes[quizzes.length-1];
+                activities.push(`🏆 Scored ${state.quizScores[lastQ]}% on Module ${lastQ.replace('m','')} Quiz`);
+            }
+            if (state.lastExport) {
+                activities.push(`💾 Backed up data on ${new Date(state.lastExport).toLocaleDateString()}`);
+            }
+            
+            if (activities.length === 0) {
+                feed.innerHTML = '<li>No recent activity. Start studying!</li>';
+            } else {
+                activities.reverse().forEach(act => {
+                    feed.innerHTML += `<li>${act}</li>`;
+                });
+            }
+        }
+
+        /* =========================================
+           COURSES & LESSONS
+           ========================================= */
+        function renderCourses() {
+            const container = document.getElementById('modules-container');
+            container.innerHTML = '';
+
+            curriculum.forEach(mod => {
+                let modHtml = `<div class="bg-ict-panel border border-ict-border rounded-xl p-6 mb-6">
+                    <h3 class="text-xl font-bold text-white mb-2">${mod.title}</h3>
+                    <p class="text-sm text-gray-400 mb-4">${mod.desc}</p>
+                    <div class="space-y-2">`;
+                
+                mod.lessons.forEach(less => {
+                    const isComp = state.progress[less.id];
+                    modHtml += `
+                        <div onclick="openLesson('${mod.id}', '${less.id}')" class="flex items-center justify-between p-3 rounded bg-ict-bg border ${isComp ? 'border-ict-win' : 'border-ict-border'} hover:border-ict-pink cursor-pointer transition">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xl">${isComp ? '✅' : '▶️'}</span>
+                                <span class="text-white font-medium">${less.title}</span>
+                            </div>
+                        </div>`;
+                });
+                modHtml += `</div></div>`;
+                container.innerHTML += modHtml;
+            });
+        }
+
+        function findLessonData(lessonId) {
+            for (let m of curriculum) {
+                for (let l of m.lessons) {
+                    if (l.id === lessonId) return l;
+                }
+            }
+            return null;
+        }
+
+        function openLesson(modId, lessonId) {
+            currentLesson = lessonId;
+            const lesson = findLessonData(lessonId);
+            if (!lesson) return;
+
+            document.getElementById('lesson-title').innerText = lesson.title;
+            document.getElementById('lesson-video').src = lesson.video;
+            document.getElementById('lesson-desc').innerText = lesson.desc;
+            
+            const cl = document.getElementById('lesson-checklist');
+            cl.innerHTML = lesson.checklist.map(item => `<li>${item}</li>`).join('');
+
+            document.getElementById('lesson-notes').value = state.notes[lessonId] || '';
+            
+            updateCompleteButton();
+            nav('lesson');
+        }
+
+        function updateCompleteButton() {
+            const btn = document.getElementById('btn-complete');
+            if (state.progress[currentLesson]) {
+                btn.innerText = "Completed ✅";
+                btn.className = "w-full py-3 rounded-xl font-bold transition border border-ict-win bg-ict-win/10 text-ict-win";
+            } else {
+                btn.innerText = "Mark as Complete";
+                btn.className = "w-full py-3 rounded-xl font-bold transition border border-ict-border bg-ict-bg text-white hover:border-ict-pink";
+            }
+        }
+
+        function toggleLessonComplete() {
+            if (state.progress[currentLesson]) {
+                delete state.progress[currentLesson];
+            } else {
+                state.progress[currentLesson] = true;
+            }
+            saveState();
+            updateCompleteButton();
+        }
+
+        function saveNotes() {
+            if (!currentLesson) return;
+            const text = document.getElementById('lesson-notes').value;
+            state.notes[currentLesson] = text;
+            saveState();
+        }
+
+        /* =========================================
+           QUIZZES
+           ========================================= */
+        function renderQuizzesList() {
+            const container = document.getElementById('quiz-list-container');
+            container.innerHTML = '';
+
+            curriculum.forEach(mod => {
+                const score = state.quizScores[mod.id];
+                let scoreDisplay = score !== undefined ? `<span class="${score===100?'text-ict-win':'text-yellow-400'} font-bold">Best: ${score}%</span>` : `<span class="text-gray-500">Not attempted</span>`;
+                
+                container.innerHTML += `
+                    <div class="bg-ict-panel border border-ict-border rounded-xl p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-2">${mod.title} Quiz</h3>
+                            <p class="text-sm text-gray-400 mb-4">Test your knowledge on ${mod.title.split(':')[1]}.</p>
+                        </div>
+                        <div class="flex items-center justify-between mt-4 border-t border-ict-border pt-4">
+                            ${scoreDisplay}
+                            <button onclick="startQuiz('${mod.id}')" class="bg-ict-bg border border-ict-pink text-ict-pink px-4 py-2 rounded hover:bg-ict-pink hover:text-white transition">Start Quiz</button>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function startQuiz(modId) {
+            currentQuizModule = modId;
+            const mod = curriculum.find(m => m.id === modId);
+            document.getElementById('active-quiz-title').innerText = `${mod.title} - Quiz`;
+            
+            const qContainer = document.getElementById('quiz-questions-container');
+            qContainer.innerHTML = '';
+            document.getElementById('quiz-results').classList.add('hidden');
+            
+            mod.quiz.forEach((q, index) => {
+                let optionsHtml = q.options.map((opt, i) => `
+                    <label class="block p-3 rounded border border-ict-border bg-ict-bg cursor-pointer hover:border-ict-pink transition mb-2 flex items-center gap-3">
+                        <input type="radio" name="q${index}" value="${i}" class="accent-ict-pink w-4 h-4" required>
+                        <span class="text-white text-sm">${opt}</span>
+                    </label>
+                `).join('');
+
+                qContainer.innerHTML += `
+                    <div>
+                        <p class="text-white font-bold mb-3">${index + 1}. ${q.q}</p>
+                        ${optionsHtml}
+                    </div>
+                `;
+            });
+
+            nav('quiz-run');
+        }
+
+        function submitQuiz(e) {
+            e.preventDefault();
+            const mod = curriculum.find(m => m.id === currentQuizModule);
+            const formData = new FormData(e.target);
+            let correct = 0;
+
+            mod.quiz.forEach((q, index) => {
+                const answer = parseInt(formData.get(`q${index}`));
+                if (answer === q.a) correct++;
+            });
+
+            const score = Math.round((correct / mod.quiz.length) * 100);
+            
+            if (!state.quizScores[currentQuizModule] || score > state.quizScores[currentQuizModule]) {
+                state.quizScores[currentQuizModule] = score;
+                saveState();
+            }
+
+            const resDiv = document.getElementById('quiz-results');
+            resDiv.classList.remove('hidden');
+            if (score === 100) {
+                resDiv.className = "mt-6 p-4 rounded border border-ict-win bg-ict-win/10 text-ict-win text-center font-bold text-lg";
+                resDiv.innerText = `Score: 100% - Flawless! Check your reward!`;
+                triggerCelebration(currentQuizModule);
+            } else {
+                resDiv.className = "mt-6 p-4 rounded border border-yellow-500 bg-yellow-500/10 text-yellow-500 text-center font-bold text-lg";
+                resDiv.innerText = `Score: ${score}%. Review the material and try again to get 100%!`;
+            }
+        }
+
+        function triggerCelebration(modId) {
+            document.getElementById('celebration-modal').classList.remove('hidden');
+            try {
+                let audio = new Audio(`./public/audio/${modId}_passed.mp3`);
+                audio.play().catch(e => console.log("Audio play failed (maybe missing file):", e));
+            } catch (e) { console.error(e); }
+        }
+
+        function closeModal() {
+            document.getElementById('celebration-modal').classList.add('hidden');
+            nav('quizzes');
+        }
+
+        /* =========================================
+           NOTES SYSTEM
+           ========================================= */
+        function renderAllNotes() {
+            const query = document.getElementById('note-search').value.toLowerCase();
+            const container = document.getElementById('all-notes-container');
+            container.innerHTML = '';
+
+            let found = false;
+            for (let lessonId in state.notes) {
+                const text = state.notes[lessonId];
+                if (text && text.trim() !== '') {
+                    if (query && !text.toLowerCase().includes(query)) continue;
+                    
+                    const lesson = findLessonData(lessonId);
+                    if (!lesson) continue;
+
+                    found = true;
+                    container.innerHTML += `
+                        <div class="bg-ict-panel border border-ict-border p-4 rounded-xl">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-bold text-ict-pink">${lesson.title}</h4>
+                                <button onclick="openLesson('${lessonId.substring(0,2)}', '${lessonId}')" class="text-xs text-gray-400 hover:text-white underline">Go to lesson</button>
+                            </div>
+                            <p class="text-sm text-gray-300 whitespace-pre-wrap">${text}</p>
+                        </div>
+                    `;
+                }
+            }
+            if (!found) {
+                container.innerHTML = '<p class="text-gray-500 italic">No notes found. Start typing in a lesson!</p>';
+            }
+        }
+
+        /* =========================================
+           DATA SYNC (EXPORT/IMPORT)
+           ========================================= */
+        function exportData() {
+            state.lastExport = Date.now();
+            saveState(); 
+            
+            const dataStr = JSON.stringify(state);
+            const blob = new Blob([dataStr], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'emilia-progress-backup.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            renderDashboard(); 
+        }
+
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedState = JSON.parse(e.target.result);
+                    if (importedState && typeof importedState === 'object') {
+                        state = { ...state, ...importedState };
+                        saveState();
+                        alert("Progress imported successfully! Reloading...");
+                        location.reload();
+                    }
+                } catch (err) {
+                    alert("Error reading backup file. Make sure it's the correct JSON file.");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Boot
+        window.onload = initApp;
+    </script>
 </body>
 </html>
