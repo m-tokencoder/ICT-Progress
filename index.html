@@ -11,24 +11,14 @@ tailwind.config = {
 darkMode: 'class',
 theme: {
 extend: {
-fontFamily: {
-sans: ['Inter', 'sans-serif'],
-},
+fontFamily: { sans: ['Inter', 'sans-serif'], },
 colors: {
 ict: {
-bg: '#09090b', // zinc-950
-panel: '#18181b', // zinc-900
-border: '#27272a', // zinc-800
-borderHover: '#3f3f46', // zinc-700
-pink: '#ec4899', // pink-500
-pinkHover: '#f43f5e', // rose-500
-pinkMuted: 'rgba(236, 72, 153, 0.1)',
-win: '#10b981', // emerald-500
-winMuted: 'rgba(16, 185, 129, 0.1)',
-loss: '#ef4444', // red-500
-lossMuted: 'rgba(239, 68, 68, 0.1)',
-text: '#f4f4f5', // zinc-100
-muted: '#a1a1aa', // zinc-400
+bg: '#09090b', panel: '#18181b', border: '#27272a', borderHover: '#3f3f46',
+pink: '#ec4899', pinkHover: '#f43f5e', pinkMuted: 'rgba(236, 72, 153, 0.1)',
+win: '#10b981', winMuted: 'rgba(16, 185, 129, 0.1)',
+loss: '#ef4444', lossMuted: 'rgba(239, 68, 68, 0.1)',
+text: '#f4f4f5', muted: '#a1a1aa',
 }
 },
 animation: {
@@ -36,57 +26,24 @@ animation: {
 'slide-up': 'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
 },
 keyframes: {
-fadeIn: {
-'0%': { opacity: '0' },
-'100%': { opacity: '1' },
-},
-slideUp: {
-'0%': { opacity: '0', transform: 'translateY(15px)' },
-'100%': { opacity: '1', transform: 'translateY(0)' },
-}
+fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' }, },
+slideUp: { '0%': { opacity: '0', transform: 'translateY(15px)' }, '100%': { opacity: '1', transform: 'translateY(0)' }, }
 }
 }
 }
 }
 </script>
 <style>
-body {
-background-color: #09090b;
-color: #f4f4f5;
-font-family: 'Inter', sans-serif;
--webkit-font-smoothing: antialiased;
-}
-/* Custom Scrollbar for a premium feel */
+body { background-color: #09090b; color: #f4f4f5; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
-
 .hidden { display: none !important; }
-
-/* Checkbox & Radio styling */
-input[type="checkbox"], input[type="radio"] {
-accent-color: #ec4899;
-cursor: pointer;
-}
-
-/* Smooth transitions for interactive elements */
-.glass-panel {
-background: linear-gradient(145deg, #18181b 0%, #121214 100%);
-box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
-}
-
-/* Accordion transition */
-.accordion-content {
-transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-max-height: 0;
-opacity: 0;
-overflow: hidden;
-}
-.accordion-content.open {
-max-height: 2000px;
-opacity: 1;
-}
+input[type="checkbox"], input[type="radio"] { accent-color: #ec4899; cursor: pointer; }
+.glass-panel { background: linear-gradient(145deg, #18181b 0%, #121214 100%); box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5); }
+.accordion-content { transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; max-height: 0; opacity: 0; overflow: hidden; }
+.accordion-content.open { max-height: 2000px; opacity: 1; }
 </style>
 </head>
 <body class="h-screen w-screen overflow-hidden flex flex-col text-ict-text">
@@ -94,9 +51,7 @@ opacity: 1;
 <!-- LOGIN VIEW -->
 <div id="login-view" class="fixed inset-0 z-50 flex items-center justify-center bg-ict-bg bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-zinc-900 to-ict-bg animate-fade-in">
 <div class="glass-panel border border-ict-border p-10 rounded-2xl w-full max-w-md text-center mx-4 animate-slide-up relative overflow-hidden">
-<!-- Decorative gradient orb -->
 <div class="absolute -top-20 -right-20 w-40 h-40 bg-ict-pink opacity-20 blur-3xl rounded-full"></div>
-
 <h1 class="text-3xl font-bold text-white mb-2 tracking-tight">Welcome Emilia <span class="text-ict-pink">❤️</span></h1>
 <p class="text-sm text-ict-muted mb-8">Authenticate to access the Apollo terminal.</p>
 
@@ -129,9 +84,7 @@ Remember session
 <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-ict-pink to-rose-700 flex items-center justify-center shadow-lg shadow-pink-500/20">
 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
 </div>
-<h2 class="text-lg font-bold text-white tracking-widest uppercase">
-Apollo
-</h2>
+<h2 class="text-lg font-bold text-white tracking-widest uppercase">Apollo</h2>
 </div>
 
 <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto mt-2">
@@ -270,7 +223,6 @@ Import Data
 
 <!-- LESSON VIEW -->
 <div id="view-lesson" class="hidden p-0 md:p-0 w-full animate-slide-up">
-<!-- Lesson Header Nav -->
 <div class="bg-ict-panel border-b border-ict-border px-6 py-4 sticky top-0 z-40 flex items-center justify-between">
 <button onclick="nav('courses')" class="flex items-center gap-2 text-ict-muted hover:text-white transition-colors text-sm font-medium">
 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
@@ -280,12 +232,9 @@ Back to Curriculum
 </div>
 
 <div class="p-6 md:p-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
-<!-- Left Column: Video & Content -->
 <div class="lg:col-span-2 space-y-8">
 <div>
 <h1 id="lesson-title" class="text-3xl font-bold text-white mb-6 tracking-tight">Lesson Title</h1>
-
-<!-- Video Container -->
 <div class="aspect-video bg-black rounded-2xl overflow-hidden border border-ict-border shadow-2xl shadow-black/50 relative group">
 <div class="absolute inset-0 bg-ict-bg flex items-center justify-center" id="video-skeleton">
 <svg class="w-10 h-10 text-ict-border animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
@@ -294,7 +243,6 @@ Back to Curriculum
 </div>
 </div>
 
-<!-- Content Flow -->
 <div class="glass-panel border border-ict-border rounded-2xl overflow-hidden">
 <div class="p-8">
 <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
@@ -302,22 +250,17 @@ Back to Curriculum
 Concept Summary
 </h3>
 <p id="lesson-desc" class="text-ict-muted text-[15px] leading-relaxed mb-8"></p>
-
 <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 border-t border-ict-border pt-8">
 <svg class="w-5 h-5 text-ict-win" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
 Learning Objectives
 </h3>
-<ul id="lesson-checklist" class="space-y-3 mt-4">
-<!-- Populated by JS -->
-</ul>
+<ul id="lesson-checklist" class="space-y-3 mt-4"></ul>
 </div>
-
 <div class="bg-ict-bg p-6 border-t border-ict-border flex justify-end">
 <button id="btn-complete" onclick="toggleLessonComplete()" class="px-8 py-3.5 rounded-xl font-bold transition-all border flex items-center gap-2 text-sm shadow-lg"></button>
 </div>
 </div>
 
-<!-- Module Quiz Entry (Shown at bottom of lesson) -->
 <div id="lesson-quiz-section" class="glass-panel border border-ict-border rounded-2xl p-8 mt-10">
 <div class="flex items-start justify-between">
 <div>
@@ -327,12 +270,8 @@ Module Assessment
 </h3>
 <p class="text-ict-muted text-sm">Test your comprehension of this module to solidify the concepts.</p>
 </div>
-<button onclick="startQuizFromLesson()" class="bg-ict-panel border border-ict-border hover:border-ict-pink hover:text-white px-6 py-3 rounded-xl font-medium transition-all text-sm whitespace-nowrap shadow-md">
-Take Quiz →
-</button>
+<button onclick="startQuizFromLesson()" class="bg-ict-panel border border-ict-border hover:border-ict-pink hover:text-white px-6 py-3 rounded-xl font-medium transition-all text-sm whitespace-nowrap shadow-md">Take Quiz →</button>
 </div>
-
-<!-- Mini Quiz History for this module -->
 <div id="mini-quiz-history" class="mt-6 border-t border-ict-border pt-6 hidden">
 <h4 class="text-sm font-bold text-white mb-3 uppercase tracking-wider">Previous Attempts</h4>
 <div id="mini-history-list" class="space-y-2"></div>
@@ -340,7 +279,6 @@ Take Quiz →
 </div>
 </div>
 
-<!-- Right Column: Notes -->
 <div class="lg:col-span-1">
 <div class="sticky top-24">
 <div class="flex items-center justify-between mb-4">
@@ -365,7 +303,6 @@ Study Notes
 <h2 class="text-3xl font-bold text-white tracking-tight">Assessments & History</h2>
 <p class="text-ict-muted mt-2 text-lg">Verify your institutional knowledge and review past performance.</p>
 </header>
-
 <div class="bg-blue-900/10 border border-blue-500/20 p-5 rounded-2xl mb-10 flex items-start gap-4">
 <svg class="w-6 h-6 text-blue-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
 <div>
@@ -373,10 +310,7 @@ Study Notes
 <p class="text-sm text-blue-200/80 leading-relaxed">Achieve a 100% flawless score on any module assessment to unlock terminal rewards. All attempts are permanently logged for review.</p>
 </div>
 </div>
-
-<div id="quiz-list-container" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-<!-- Populated by JS -->
-</div>
+<div id="quiz-list-container" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
 </div>
 
 <!-- QUIZ RUN/REVIEW VIEW -->
@@ -392,18 +326,13 @@ Exit Assessment
 <span id="quiz-meta-time" class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Time Taken</span>
 </div>
 </div>
-
 <div class="glass-panel border border-ict-border p-8 md:p-10 rounded-3xl shadow-2xl relative">
-<!-- Score Header for Review Mode -->
 <div id="quiz-review-score-header" class="hidden mb-10 pb-8 border-b border-ict-border text-center">
 <p class="text-ict-muted uppercase tracking-wider font-semibold text-sm mb-2">Final Score</p>
 <p id="review-score-display" class="text-6xl font-bold text-white"></p>
 </div>
-
 <form id="quiz-form" onsubmit="submitQuiz(event)">
-<div id="quiz-questions-container" class="space-y-12 mb-10">
-<!-- Populated by JS -->
-</div>
+<div id="quiz-questions-container" class="space-y-12 mb-10"></div>
 <button id="btn-submit-quiz" type="submit" class="w-full bg-ict-pink hover:bg-ict-pinkHover text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-pink-500/20 active:scale-[0.99] text-lg">Submit Assessment</button>
 </form>
 </div>
@@ -415,17 +344,13 @@ Exit Assessment
 <h2 class="text-3xl font-bold text-white tracking-tight">Global Study Notes</h2>
 <p class="text-ict-muted mt-2 text-lg">Search and review all your saved insights.</p>
 </header>
-
 <div class="relative mb-10 group">
 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
 <svg class="w-5 h-5 text-zinc-500 group-focus-within:text-ict-pink transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
 </div>
 <input type="text" id="note-search" placeholder="Search insights by keyword..." oninput="renderAllNotes()" class="w-full bg-ict-panel border border-ict-border rounded-xl pl-12 pr-4 py-4 text-white placeholder-zinc-500 focus:outline-none focus:border-ict-pink focus:ring-1 focus:ring-ict-pink transition-all shadow-lg">
 </div>
-
-<div id="all-notes-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<!-- Populated by JS -->
-</div>
+<div id="all-notes-container" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
 </div>
 
 </main>
@@ -451,170 +376,41 @@ Terminal reward audio sequence engaged...
 </div>
 
 <script>
-/* =========================================
-DATA STRUCTURES & CURRICULUM
-========================================= */
 const APP_DATA_KEY = 'ict_apollo_emilia_data_v2';
 
 let state = {
-isLoggedIn: false,
-rememberMe: false,
-progress: {},
-notes: {},
- quizHistory: {}, // Changed from quizScores for the new Review System
-streak: 0,
-lastLogin: null,
-lastExport: null
+isLoggedIn: false, rememberMe: false, progress: {}, notes: {}, quizHistory: {}, streak: 0, lastLogin: null, lastExport: null
 };
 
-// Migration from old app version if needed
 const oldDataStr = localStorage.getItem('ict_apollo_emilia_data');
 if (oldDataStr && !localStorage.getItem(APP_DATA_KEY)) {
 try {
 let old = JSON.parse(oldDataStr);
-state.progress = old.progress || {};
-state.notes = old.notes || {};
-state.streak = old.streak || 0;
-// Convert old high scores to a fake history entry to preserve data
+state.progress = old.progress || {}; state.notes = old.notes || {}; state.streak = old.streak || 0;
 if (old.quizScores) {
-for (let mId in old.quizScores) {
-state.quizHistory[mId] = [{
-date: new Date().toISOString(),
-score: old.quizScores[mId],
-timeTaken: 0,
-answers: [],
-legacy: true
-}];
-}
+for (let mId in old.quizScores) { state.quizHistory[mId] = [{ date: new Date().toISOString(), score: old.quizScores[mId], timeTaken: 0, answers: [], legacy: true }]; }
 }
 localStorage.setItem(APP_DATA_KEY, JSON.stringify(state));
 } catch(e){}
 }
 
-/*
-CURRICULUM UPGRADE
-- Unique, verified educational videos for every lesson.
-- Added explanation to every quiz question.
-*/
 const curriculum = [
-{
-id: 'm1', title: 'Module 1: Market Structure & Shifts', desc: 'The fundamental building blocks of price action.',
-lessons: [
-{ id: 'm1l1', title: 'Intro to Market Structure', video: 'https://www.youtube.com/embed/1_f-gMv1zJE', desc: 'Understanding how price moves in trends. Markets are fractal and move in swings, creating Highs and Lows.', checklist: ['Identify Higher Highs (HH) & Higher Lows (HL)', 'Identify Lower Highs (LH) & Lower Lows (LL)', 'Understand the dealing range'] },
-{ id: 'm1l2', title: 'Break of Structure (BOS)', video: 'https://www.youtube.com/embed/u1y6Jv_p40E', desc: 'A Break of Structure occurs when price successfully pushes past a previous major high (in an uptrend) or low (in a downtrend), signaling trend continuation.', checklist: ['Requires candle body closure, not just a wick', 'Validates trend continuation', 'Leaves behind an Order Block usually'] },
-{ id: 'm1l3', title: 'Change of Character (CHoCH)', video: 'https://www.youtube.com/embed/gDHKN-t0fXY', desc: 'The first sign of a potential reversal. Occurs when an uptrend breaks its last Higher Low, or a downtrend breaks its last Lower High.', checklist: ['First shift in order flow', 'Different from a BOS (which is continuation)', 'Often occurs after a liquidity sweep'] }
-],
-quiz: [
-{ q: "What defines an uptrend?", options: ["Lower Highs and Lower Lows", "Higher Highs and Higher Lows", "Equal Highs and Higher Lows", "Consolidation"], a: 1, explanation: "An uptrend is characterized by continuous pushes to the upside forming Higher Highs (HH) and retracing to form Higher Lows (HL)." },
-{ q: "What validates a true Break of Structure (BOS)?", options: ["A wick pushing past the old high/low", "A body closure past the old high/low", "High volume on the breakout", "An immediate reversal"], a: 1, explanation: "A true BOS requires a candle body to close beyond the previous structural point. A wick is merely a liquidity sweep." },
-{ q: "A Change of Character (CHoCH) signifies what?", options: ["Trend continuation", "A mitigation block", "The first sign of a trend reversal", "A time-based killzone"], a: 2, explanation: "A CHoCH happens when the most recent structural low/high is broken against the trend, signaling an early potential reversal in order flow." }
-]
-},
-{
-id: 'm2', title: 'Module 2: Liquidity Pools & Sweeps', desc: 'Where the money rests and why price seeks it.',
-lessons: [
-{ id: 'm2l1', title: 'Buy-Side & Sell-Side Liquidity', video: 'https://www.youtube.com/embed/KjLwW4q9bJc', desc: 'Liquidity is where stop losses rest. Buy-Side Liquidity (BSL) rests above old highs. Sell-Side Liquidity (SSL) rests below old lows.', checklist: ['BSL = Buy stops from short sellers', 'SSL = Sell stops from long buyers', 'Price is drawn to liquidity like a magnet'] },
-{ id: 'm2l2', title: 'Equal Highs & Lows (EQH/EQL)', video: 'https://www.youtube.com/embed/hB55bUu4nI4', desc: 'Retail traders view equal highs/lows as "support and resistance". Smart money views them as high-density liquidity pools waiting to be engineered.', checklist: ['Identify Relative Equal Highs/Lows', 'Anticipate sweeps rather than bounces', 'Avoid trading traditional S/R breakouts'] },
-{ id: 'm2l3', title: 'Stop Hunts & Liquidity Sweeps', video: 'https://www.youtube.com/embed/aP9E2G30WEE', desc: 'When price pierces a liquidity pool but fails to close beyond it (wick only), it is a sweep. Smart money is taking the stops to fuel a reversal.', checklist: ['Sweep = Wick through liquidity, body closes inside', 'Also known as Judas Swing', 'High probability setup when combined with CHoCH'] }
-],
-quiz: [
-{ q: "Where does Buy-Side Liquidity (BSL) rest?", options: ["Below old lows", "At the 50% equilibrium", "Above old highs", "Inside an Order Block"], a: 2, explanation: "BSL rests above old highs, consisting of buy stops from short sellers and breakout buyers." },
-{ q: "How does Smart Money view Equal Highs (EQH)?", options: ["Strong resistance to sell at", "A liquidity pool to sweep", "A Fair Value Gap", "A guaranteed breakout zone"], a: 1, explanation: "Retail sees EQH as resistance. Algorithms see it as a dense pool of liquidity to be swept before a reversal." },
-{ q: "A Stop Hunt / Liquidity Sweep is typically characterized by:", options: ["A strong body closure past the level", "A wick piercing the level and closing back inside", "Consolidation at the level", "A massive gap in price"], a: 1, explanation: "A true sweep pierces the level to trigger stops but fails to close beyond it, leaving a prominent wick." }
-]
-},
-{
-id: 'm3', title: 'Module 3: Fair Value Gaps (FVG)', desc: 'Identifying market inefficiency and imbalances.',
-lessons: [
-{ id: 'm3l1', title: 'What is a Fair Value Gap?', video: 'https://www.youtube.com/embed/wzXjZ3L1YhQ', desc: 'A 3-candle pattern where the wick of the 1st candle and the wick of the 3rd candle do not overlap, leaving a gap in the 2nd candle. This is an imbalance.', checklist: ['Identify the 3-candle formation', 'Bullish FVG (BISI) vs Bearish FVG (SIBI)', 'Price naturally wants to return to fill the gap'] },
-{ id: 'm3l2', title: 'Consequent Encroachment (CE)', video: 'https://www.youtube.com/embed/Rk0H2h7v9o0', desc: 'The exact 50% midpoint of a Fair Value Gap. It acts as a highly sensitive institutional reference point for price delivery.', checklist: ['Measure from FVG high to FVG low', 'Mark the 50% line', 'Watch for bodies respecting the CE'] },
-{ id: 'm3l3', title: 'FVG Mitigation & Inversions', video: 'https://www.youtube.com/embed/1B9Ua0tXQ_I', desc: 'When a FVG is filled and price reverses, it is mitigated. If price disrespects a FVG and closes through it strongly, it becomes an Inversion FVG (support turns resistance).', checklist: ['Mitigation = Price uses FVG and reverses', 'Inversion = Price fails FVG, closes through it', 'Inversions are powerful entry triggers'] }
-],
-quiz: [
-{ q: "A Fair Value Gap (FVG) consists of how many candles?", options: ["1", "2", "3", "4"], a: 2, explanation: "An FVG is always a 3-candle sequence where the wicks of candle 1 and candle 3 fail to overlap." },
-{ q: "What is Consequent Encroachment?", options: ["The 100% fill of a gap", "The 50% midpoint of a FVG", "When price ignores a gap", "A liquidity sweep"], a: 1, explanation: "Consequent Encroachment (CE) specifically refers to the 50% equilibrium level of a Fair Value Gap." },
-{ q: "What happens when price disrespects a FVG and closes through it?", options: ["It becomes an Inversion FVG", "The trend is over", "It forms a Breaker Block", "It creates Equal Highs"], a: 0, explanation: "When an FVG is forcefully broken and bodies close through it, it acts inverted—former support becomes resistance, or vice versa." }
-]
-},
-{
-id: 'm4', title: 'Module 4: Order Blocks & PD Arrays', desc: 'Institutional footprint identification.',
-lessons: [
-{ id: 'm4l1', title: 'Bullish & Bearish Order Blocks', video: 'https://www.youtube.com/embed/7V9_0u3Nq5Y', desc: 'An Order Block (OB) is the last down candle before an explosive up move (Bullish OB) or the last up candle before an explosive down move (Bearish OB) that breaks structure.', checklist: ['Must result in a BOS or CHoCH', 'Must leave behind a FVG (imbalance)', 'Price returns to mitigate the OB'] },
-{ id: 'm4l2', title: 'Breaker Blocks', video: 'https://www.youtube.com/embed/J9yqQf9B61I', desc: 'A failed Order Block. When price sweeps liquidity, forms an OB, but then aggressively breaks back through it. The old OB becomes a Breaker.', checklist: ['Requires a liquidity sweep first', 'Price breaks through the OB that caused the sweep', 'High probability return to the Breaker'] },
-{ id: 'm4l3', title: 'PD Array Matrix Overview', video: 'https://www.youtube.com/embed/kR8nL62Uu3M', desc: 'The hierarchy of institutional reference points. Arranging Order Blocks, FVGs, Breakers, and Liquidity into a matrix to determine which level holds weight.', checklist: ['Understand Premium Arrays (Resistance)', 'Understand Discount Arrays (Support)', 'Combine arrays for confluence'] }
-],
-quiz: [
-{ q: "What validates an Order Block?", options: ["It must just be a large candle", "It must break structure and leave an imbalance (FVG)", "It must occur at 12:00 PM", "It must be an inside bar"], a: 1, explanation: "For a candle to be a valid Order Block, it must sponsor an explosive move that leaves an FVG and breaks market structure." },
-{ q: "A Breaker Block is essentially:", options: ["A new Fair Value Gap", "An equal high", "A failed Order Block after a liquidity sweep", "A consolidation zone"], a: 2, explanation: "A Breaker is formed when an Order Block that caused a liquidity sweep is forcefully broken, reversing its role." },
-{ q: "In the PD Array Matrix, Discount Arrays act as:", options: ["Resistance for shorting", "Take profit targets for shorts", "Institutional Support for buying", "Liquidity to be swept"], a: 2, explanation: "Discount arrays (found below the 50% mark of a range) are institutional areas of support used to accumulate long positions." }
-]
-},
-{
-id: 'm5', title: 'Module 5: Premium & Discount Zones', desc: 'Knowing where you are in the dealing range.',
-lessons: [
-{ id: 'm5l1', title: 'Defining the Dealing Range', video: 'https://www.youtube.com/embed/l59wQh7H-Xo', desc: 'The current working range defined by the most recent major swing high and swing low that resulted in a break of structure.', checklist: ['Find the Swing High', 'Find the Swing Low', 'Draw Fibonacci from wick to wick'] },
-{ id: 'm5l2', title: 'Equilibrium (50%)', video: 'https://www.youtube.com/embed/x5mRjSgR9uI', desc: 'The 50% mark of your dealing range. Smart money buys below 50% (Discount) and sells above 50% (Premium). Never buy in Premium or sell in Discount.', checklist: ['Above 50% = Premium (Expensive)', 'Below 50% = Discount (Cheap)', 'Wait for price to cross Equilibrium before entering'] },
-{ id: 'm5l3', title: 'Optimal Trade Entry (OTE)', video: 'https://www.youtube.com/embed/bQ0J2aJdO8I', desc: 'The golden zone for entries. Located deep within Premium or Discount. Specifically the 62%, 70.5%, and 79% Fibonacci retracement levels.', checklist: ['Draw Fib from impulse swing', 'Identify the 62% - 79% zone', 'Look for OBs or FVGs resting inside the OTE'] }
-],
-quiz: [
-{ q: "Where should you look for long (buy) entries?", options: ["In Premium (>50%)", "At exactly 50%", "In Discount (<50%)", "Above the old high"], a: 2, explanation: "You only buy in a Discount (below 50% equilibrium) because that is where price is 'cheap' for institutional accumulation." },
-{ q: "What does Equilibrium represent in a dealing range?", options: ["The Optimal Trade Entry", "The 50% midpoint", "A Fair Value Gap", "A Stop Hunt"], a: 1, explanation: "Equilibrium is exactly the 50% midpoint of the current dealing range." },
-{ q: "What are the standard Optimal Trade Entry (OTE) Fibonacci levels?", options: ["38.2%, 50%, 61.8%", "62%, 70.5%, 79%", "100%, 127%, 161%", "23.6%, 38.2%, 50%"], a: 1, explanation: "The ICT OTE parameters are the 62%, 70.5% (sweet spot), and 79% retracement levels." }
-]
-},
-{
-id: 'm6', title: 'Module 6: Killzones & Time', desc: 'When to execute. Time is more important than price.',
-lessons: [
-{ id: 'm6l1', title: 'Macro vs Micro Time', video: 'https://www.youtube.com/embed/Y0H9v4zLz5k', desc: 'Algorithmic price delivery is tied to specific times of day. A perfect setup at the wrong time of day will fail.', checklist: ['Always use New York Local Time (EST)', 'Algorithms run on specific schedules', 'Avoid trading during dead zones (e.g. Asian session chop)'] },
-{ id: 'm6l2', title: 'London & NY Killzones', video: 'https://www.youtube.com/embed/Z0o4D9o1TfE', desc: 'London Killzone (2AM - 5AM EST) often creates the High or Low of the day. New York Killzone (7AM - 10AM EST) provides continuation or reversal.', checklist: ['London: Look for fakeouts (Judas Swing)', 'NY: Look for alignment with HTF direction', 'Mark session open times on your chart'] },
-{ id: 'm6l3', title: 'The Silver Bullet', video: 'https://www.youtube.com/embed/aM3zY4v0d7w', desc: 'A specific time-based window where a high-probability FVG setup forms. Specifically 10AM-11AM, 2PM-3PM, and 3AM-4AM EST.', checklist: ['Identify the 1-hour window', 'Wait for a liquidity sweep', 'Enter on the FVG formation targeting opposite liquidity'] }
-],
-quiz: [
-{ q: "What timezone must you use for ICT concepts?", options: ["London (GMT)", "Tokyo (JST)", "New York (EST/EDT)", "Your local timezone"], a: 2, explanation: "The algorithm runs on New York local time. All charts must be set to UTC-4/UTC-5 (EST/EDT)." },
-{ q: "What typically happens during the London Killzone?", options: ["The market consolidates tightly", "It often forms the High or Low of the daily range", "It completely ignores HTF structure", "Volume dries up completely"], a: 1, explanation: "London often engineers the fakeout (Judas Swing) that establishes the High or Low of the day." },
-{ q: "Which of the following is a classic Silver Bullet window?", options: ["8AM - 9AM EST", "10AM - 11AM EST", "12PM - 1PM EST", "4PM - 5PM EST"], a: 1, explanation: "The morning Silver Bullet window occurs exactly between 10:00 AM and 11:00 AM EST." }
-]
-},
-{
-id: 'm7', title: 'Module 7: Multi-Timeframe Analysis', desc: 'Top-down alignment for high probability.',
-lessons: [
-{ id: 'm7l1', title: 'Top-Down Framework', video: 'https://www.youtube.com/embed/e1P8eR7z0vI', desc: 'Starting from the Weekly/Daily charts to find the overarching narrative, then dropping to H4/H1 for structure, and finally M15/M5 for execution.', checklist: ['Daily: Where is the Draw on Liquidity (DOL)?', 'H1: What is the current dealing range?', 'M5: Waiting for the CHoCH entry'] },
-{ id: 'm7l2', title: 'HTF Bias vs LTF Execution', video: 'https://www.youtube.com/embed/C28fPz2mKng', desc: 'Your Higher Timeframe (HTF) bias dictates the direction you trade. If Daily is bullish, you only look for buys on the Lower Timeframe (LTF).', checklist: ['Never fight the Daily draw on liquidity', 'Use LTF premium/discount to enter in HTF direction', 'Patience to wait for LTF alignment'] },
-{ id: 'm7l3', title: 'Framing a Setup', video: 'https://www.youtube.com/embed/w8U7d5x9N7E', desc: 'Putting it all together: Time + HTF Bias + Liquidity Sweep + LTF CHoCH + FVG Entry = A complete trade setup.', checklist: ['Check Time (Killzone)', 'Confirm HTF narrative', 'Wait for the execution pattern to form'] }
-],
-quiz: [
-{ q: "What is the primary purpose of the Daily chart?", options: ["To find exact entry points", "To determine the overarching Draw on Liquidity (Bias)", "To trade the Silver Bullet", "To hide the noise"], a: 1, explanation: "The Daily chart dictates the macro narrative and points you toward the ultimate Draw on Liquidity (DOL)." },
-{ q: "If your Daily bias is heavily Bullish, what should you do on the 5-minute chart?", options: ["Look for short setups at resistance", "Look for buy setups in Discount arrays", "Buy blindly at market open", "Trade both directions"], a: 1, explanation: "Align LTF execution with HTF bias by waiting for the LTF to drop into a Discount and form a buy model." },
-{ q: "Which sequence correctly frames an ICT setup?", options: ["FVG -> Time -> Bias", "Time -> HTF Bias -> Sweep -> CHoCH -> Entry", "Entry -> Bias -> Time", "Sweep -> Entry (No matter the time)"], a: 1, explanation: "Time is first, followed by Bias, a Sweep for fuel, a structural shift (CHoCH), and finally the Entry mechanism." }
-]
-},
-{
-id: 'm8', title: 'Module 8: Risk Management', desc: 'The math behind preserving capital and staying in the game.',
-lessons: [
-{ id: 'm8l1', title: 'Position Sizing & Risk per Trade', video: 'https://www.youtube.com/embed/2_8r5zU1H-Y', desc: 'Never risk more than 1-2% of your account on a single trade. In funding challenges, risk 0.25% to 0.5%. Capital preservation is priority #1.', checklist: ['Calculate risk before entering', 'Stop loss dictates lot size', 'Live to trade another day'] },
-{ id: 'm8l2', title: 'Reward to Risk (R:R)', video: 'https://www.youtube.com/embed/K9q2f8v6Q7g', desc: 'Your winners must be larger than your losers. A minimum of 1:2 R:R ensures you can be wrong 50% of the time and still be profitable.', checklist: ['Target logical liquidity pools', 'Do not force unrealistic R:R targets', 'Take partial profits at 1:1 or major hurdles'] },
-{ id: 'm8l3', title: 'Journaling & Psychology', video: 'https://www.youtube.com/embed/gU9qQ9D6a3A', desc: 'Trading is a battle against yourself. Documenting every trade (emotions, setup criteria, result) is how you build a statistical edge and confidence.', checklist: ['Screenshot entries and exits', 'Note the time of day and emotions', 'Review your journal weekly'] }
-],
-quiz: [
-{ q: "What is the maximum recommended risk per trade for a funded account?", options: ["5-10%", "2-3%", "0.25% to 1%", "Risk it all on a Silver Bullet"], a: 2, explanation: "Funded accounts have strict drawdown limits. Risking 0.25% to 1% preserves capital and protects against losing streaks." },
-{ q: "Why is a 1:2 or higher Risk:Reward ratio important?", options: ["It guarantees you win every trade", "It allows you to be profitable even with a 50% win rate", "It makes trades move faster", "It avoids slippage"], a: 1, explanation: "Positive expectancy (R:R > 1:2) ensures mathematical profitability over time, even with moderate win rates." },
-{ q: "What is the main purpose of a trading journal?", options: ["To show off on Twitter", "To mathematically prove your edge and fix behavioral errors", "To memorize candlestick patterns", "To track tax deductibles"], a: 1, explanation: "A journal provides data on your behavioral flaws and mathematically proves whether your setup has a true statistical edge." }
-]
-}
+{ id: 'm1', title: 'Module 1: Market Structure & Shifts', desc: 'The fundamental building blocks of price action.', lessons: [ { id: 'm1l1', title: 'Intro to Market Structure', video: 'https://www.youtube.com/embed/1_f-gMv1zJE', desc: 'Understanding how price moves in trends. Markets are fractal and move in swings, creating Highs and Lows.', checklist: ['Identify Higher Highs (HH) & Higher Lows (HL)', 'Identify Lower Highs (LH) & Lower Lows (LL)', 'Understand the dealing range'] }, { id: 'm1l2', title: 'Break of Structure (BOS)', video: 'https://www.youtube.com/embed/u1y6Jv_p40E', desc: 'A Break of Structure occurs when price successfully pushes past a previous major high (in an uptrend) or low (in a downtrend), signaling trend continuation.', checklist: ['Requires candle body closure, not just a wick', 'Validates trend continuation', 'Leaves behind an Order Block usually'] }, { id: 'm1l3', title: 'Change of Character (CHoCH)', video: 'https://www.youtube.com/embed/gDHKN-t0fXY', desc: 'The first sign of a potential reversal. Occurs when an uptrend breaks its last Higher Low, or a downtrend breaks its last Lower High.', checklist: ['First shift in order flow', 'Different from a BOS (which is continuation)', 'Often occurs after a liquidity sweep'] } ], quiz: [ { q: "What defines an uptrend?", options: ["Lower Highs and Lower Lows", "Higher Highs and Higher Lows", "Equal Highs and Higher Lows", "Consolidation"], a: 1, explanation: "An uptrend is characterized by continuous pushes to the upside forming Higher Highs (HH) and retracing to form Higher Lows (HL)." }, { q: "What validates a true Break of Structure (BOS)?", options: ["A wick pushing past the old high/low", "A body closure past the old high/low", "High volume on the breakout", "An immediate reversal"], a: 1, explanation: "A true BOS requires a candle body to close beyond the previous structural point. A wick is merely a liquidity sweep." }, { q: "A Change of Character (CHoCH) signifies what?", options: ["Trend continuation", "A mitigation block", "The first sign of a trend reversal", "A time-based killzone"], a: 2, explanation: "A CHoCH happens when the most recent structural low/high is broken against the trend, signaling an early potential reversal in order flow." } ] },
+{ id: 'm2', title: 'Module 2: Liquidity Pools & Sweeps', desc: 'Where the money rests and why price seeks it.', lessons: [ { id: 'm2l1', title: 'Buy-Side & Sell-Side Liquidity', video: 'https://www.youtube.com/embed/KjLwW4q9bJc', desc: 'Liquidity is where stop losses rest. Buy-Side Liquidity (BSL) rests above old highs. Sell-Side Liquidity (SSL) rests below old lows.', checklist: ['BSL = Buy stops from short sellers', 'SSL = Sell stops from long buyers', 'Price is drawn to liquidity like a magnet'] }, { id: 'm2l2', title: 'Equal Highs & Lows (EQH/EQL)', video: 'https://www.youtube.com/embed/hB55bUu4nI4', desc: 'Retail traders view equal highs/lows as "support and resistance". Smart money views them as high-density liquidity pools waiting to be engineered.', checklist: ['Identify Relative Equal Highs/Lows', 'Anticipate sweeps rather than bounces', 'Avoid trading traditional S/R breakouts'] }, { id: 'm2l3', title: 'Stop Hunts & Liquidity Sweeps', video: 'https://www.youtube.com/embed/aP9E2G30WEE', desc: 'When price pierces a liquidity pool but fails to close beyond it (wick only), it is a sweep. Smart money is taking the stops to fuel a reversal.', checklist: ['Sweep = Wick through liquidity, body closes inside', 'Also known as Judas Swing', 'High probability setup when combined with CHoCH'] } ], quiz: [ { q: "Where does Buy-Side Liquidity (BSL) rest?", options: ["Below old lows", "At the 50% equilibrium", "Above old highs", "Inside an Order Block"], a: 2, explanation: "BSL rests above old highs, consisting of buy stops from short sellers and breakout buyers." }, { q: "How does Smart Money view Equal Highs (EQH)?", options: ["Strong resistance to sell at", "A liquidity pool to sweep", "A Fair Value Gap", "A guaranteed breakout zone"], a: 1, explanation: "Retail sees EQH as resistance. Algorithms see it as a dense pool of liquidity to be swept before a reversal." }, { q: "A Stop Hunt / Liquidity Sweep is typically characterized by:", options: ["A strong body closure past the level", "A wick piercing the level and closing back inside", "Consolidation at the level", "A massive gap in price"], a: 1, explanation: "A true sweep pierces the level to trigger stops but fails to close beyond it, leaving a prominent wick." } ] },
+{ id: 'm3', title: 'Module 3: Fair Value Gaps (FVG)', desc: 'Identifying market inefficiency and imbalances.', lessons: [ { id: 'm3l1', title: 'What is a Fair Value Gap?', video: 'https://www.youtube.com/embed/wzXjZ3L1YhQ', desc: 'A 3-candle pattern where the wick of the 1st candle and the wick of the 3rd candle do not overlap, leaving a gap in the 2nd candle. This is an imbalance.', checklist: ['Identify the 3-candle formation', 'Bullish FVG (BISI) vs Bearish FVG (SIBI)', 'Price naturally wants to return to fill the gap'] }, { id: 'm3l2', title: 'Consequent Encroachment (CE)', video: 'https://www.youtube.com/embed/Rk0H2h7v9o0', desc: 'The exact 50% midpoint of a Fair Value Gap. It acts as a highly sensitive institutional reference point for price delivery.', checklist: ['Measure from FVG high to FVG low', 'Mark the 50% line', 'Watch for bodies respecting the CE'] }, { id: 'm3l3', title: 'FVG Mitigation & Inversions', video: 'https://www.youtube.com/embed/1B9Ua0tXQ_I', desc: 'When a FVG is filled and price reverses, it is mitigated. If price disrespects a FVG and closes through it strongly, it becomes an Inversion FVG (support turns resistance).', checklist: ['Mitigation = Price uses FVG and reverses', 'Inversion = Price fails FVG, closes through it', 'Inversions are powerful entry triggers'] } ], quiz: [ { q: "A Fair Value Gap (FVG) consists of how many candles?", options: ["1", "2", "3", "4"], a: 2, explanation: "An FVG is always a 3-candle sequence where the wicks of candle 1 and candle 3 fail to overlap." }, { q: "What is Consequent Encroachment?", options: ["The 100% fill of a gap", "The 50% midpoint of a FVG", "When price ignores a gap", "A liquidity sweep"], a: 1, explanation: "Consequent Encroachment (CE) specifically refers to the 50% equilibrium level of a Fair Value Gap." }, { q: "What happens when price disrespects a FVG and closes through it?", options: ["It becomes an Inversion FVG", "The trend is over", "It forms a Breaker Block", "It creates Equal Highs"], a: 0, explanation: "When an FVG is forcefully broken and bodies close through it, it acts inverted—former support becomes resistance, or vice versa." } ] },
+{ id: 'm4', title: 'Module 4: Order Blocks & PD Arrays', desc: 'Institutional footprint identification.', lessons: [ { id: 'm4l1', title: 'Bullish & Bearish Order Blocks', video: 'https://www.youtube.com/embed/7V9_0u3Nq5Y', desc: 'An Order Block (OB) is the last down candle before an explosive up move (Bullish OB) or the last up candle before an explosive down move (Bearish OB) that breaks structure.', checklist: ['Must result in a BOS or CHoCH', 'Must leave behind a FVG (imbalance)', 'Price returns to mitigate the OB'] }, { id: 'm4l2', title: 'Breaker Blocks', video: 'https://www.youtube.com/embed/J9yqQf9B61I', desc: 'A failed Order Block. When price sweeps liquidity, forms an OB, but then aggressively breaks back through it. The old OB becomes a Breaker.', checklist: ['Requires a liquidity sweep first', 'Price breaks through the OB that caused the sweep', 'High probability return to the Breaker'] }, { id: 'm4l3', title: 'PD Array Matrix Overview', video: 'https://www.youtube.com/embed/kR8nL62Uu3M', desc: 'The hierarchy of institutional reference points. Arranging Order Blocks, FVGs, Breakers, and Liquidity into a matrix to determine which level holds weight.', checklist: ['Understand Premium Arrays (Resistance)', 'Understand Discount Arrays (Support)', 'Combine arrays for confluence'] } ], quiz: [ { q: "What validates an Order Block?", options: ["It must just be a large candle", "It must break structure and leave an imbalance (FVG)", "It must occur at 12:00 PM", "It must be an inside bar"], a: 1, explanation: "For a candle to be a valid Order Block, it must sponsor an explosive move that leaves an FVG and breaks market structure." }, { q: "A Breaker Block is essentially:", options: ["A new Fair Value Gap", "An equal high", "A failed Order Block after a liquidity sweep", "A consolidation zone"], a: 2, explanation: "A Breaker is formed when an Order Block that caused a liquidity sweep is forcefully broken, reversing its role." }, { q: "In the PD Array Matrix, Discount Arrays act as:", options: ["Resistance for shorting", "Take profit targets for shorts", "Institutional Support for buying", "Liquidity to be swept"], a: 2, explanation: "Discount arrays (found below the 50% mark of a range) are institutional areas of support used to accumulate long positions." } ] },
+{ id: 'm5', title: 'Module 5: Premium & Discount Zones', desc: 'Knowing where you are in the dealing range.', lessons: [ { id: 'm5l1', title: 'Defining the Dealing Range', video: 'https://www.youtube.com/embed/l59wQh7H-Xo', desc: 'The current working range defined by the most recent major swing high and swing low that resulted in a break of structure.', checklist: ['Find the Swing High', 'Find the Swing Low', 'Draw Fibonacci from wick to wick'] }, { id: 'm5l2', title: 'Equilibrium (50%)', video: 'https://www.youtube.com/embed/x5mRjSgR9uI', desc: 'The 50% mark of your dealing range. Smart money buys below 50% (Discount) and sells above 50% (Premium). Never buy in Premium or sell in Discount.', checklist: ['Above 50% = Premium (Expensive)', 'Below 50% = Discount (Cheap)', 'Wait for price to cross Equilibrium before entering'] }, { id: 'm5l3', title: 'Optimal Trade Entry (OTE)', video: 'https://www.youtube.com/embed/bQ0J2aJdO8I', desc: 'The golden zone for entries. Located deep within Premium or Discount. Specifically the 62%, 70.5%, and 79% Fibonacci retracement levels.', checklist: ['Draw Fib from impulse swing', 'Identify the 62% - 79% zone', 'Look for OBs or FVGs resting inside the OTE'] } ], quiz: [ { q: "Where should you look for long (buy) entries?", options: ["In Premium (>50%)", "At exactly 50%", "In Discount (<50%)", "Above the old high"], a: 2, explanation: "You only buy in a Discount (below 50% equilibrium) because that is where price is 'cheap' for institutional accumulation." }, { q: "What does Equilibrium represent in a dealing range?", options: ["The Optimal Trade Entry", "The 50% midpoint", "A Fair Value Gap", "A Stop Hunt"], a: 1, explanation: "Equilibrium is exactly the 50% midpoint of the current dealing range." }, { q: "What are the standard Optimal Trade Entry (OTE) Fibonacci levels?", options: ["38.2%, 50%, 61.8%", "62%, 70.5%, 79%", "100%, 127%, 161%", "23.6%, 38.2%, 50%"], a: 1, explanation: "The ICT OTE parameters are the 62%, 70.5% (sweet spot), and 79% retracement levels." } ] },
+{ id: 'm6', title: 'Module 6: Killzones & Time', desc: 'When to execute. Time is more important than price.', lessons: [ { id: 'm6l1', title: 'Macro vs Micro Time', video: 'https://www.youtube.com/embed/Y0H9v4zLz5k', desc: 'Algorithmic price delivery is tied to specific times of day. A perfect setup at the wrong time of day will fail.', checklist: ['Always use New York Local Time (EST)', 'Algorithms run on specific schedules', 'Avoid trading during dead zones (e.g. Asian session chop)'] }, { id: 'm6l2', title: 'London & NY Killzones', video: 'https://www.youtube.com/embed/Z0o4D9o1TfE', desc: 'London Killzone (2AM - 5AM EST) often creates the High or Low of the day. New York Killzone (7AM - 10AM EST) provides continuation or reversal.', checklist: ['London: Look for fakeouts (Judas Swing)', 'NY: Look for alignment with HTF direction', 'Mark session open times on your chart'] }, { id: 'm6l3', title: 'The Silver Bullet', video: 'https://www.youtube.com/embed/aM3zY4v0d7w', desc: 'A specific time-based window where a high-probability FVG setup forms. Specifically 10AM-11AM, 2PM-3PM, and 3AM-4AM EST.', checklist: ['Identify the 1-hour window', 'Wait for a liquidity sweep', 'Enter on the FVG formation targeting opposite liquidity'] } ], quiz: [ { q: "What timezone must you use for ICT concepts?", options: ["London (GMT)", "Tokyo (JST)", "New York (EST/EDT)", "Your local timezone"], a: 2, explanation: "The algorithm runs on New York local time. All charts must be set to UTC-4/UTC-5 (EST/EDT)." }, { q: "What typically happens during the London Killzone?", options: ["The market consolidates tightly", "It often forms the High or Low of the daily range", "It completely ignores HTF structure", "Volume dries up completely"], a: 1, explanation: "London often engineers the fakeout (Judas Swing) that establishes the High or Low of the day." }, { q: "Which of the following is a classic Silver Bullet window?", options: ["8AM - 9AM EST", "10AM - 11AM EST", "12PM - 1PM EST", "4PM - 5PM EST"], a: 1, explanation: "The morning Silver Bullet window occurs exactly between 10:00 AM and 11:00 AM EST." } ] },
+{ id: 'm7', title: 'Module 7: Multi-Timeframe Analysis', desc: 'Top-down alignment for high probability.', lessons: [ { id: 'm7l1', title: 'Top-Down Framework', video: 'https://www.youtube.com/embed/e1P8eR7z0vI', desc: 'Starting from the Weekly/Daily charts to find the overarching narrative, then dropping to H4/H1 for structure, and finally M15/M5 for execution.', checklist: ['Daily: Where is the Draw on Liquidity (DOL)?', 'H1: What is the current dealing range?', 'M5: Waiting for the CHoCH entry'] }, { id: 'm7l2', title: 'HTF Bias vs LTF Execution', video: 'https://www.youtube.com/embed/C28fPz2mKng', desc: 'Your Higher Timeframe (HTF) bias dictates the direction you trade. If Daily is bullish, you only look for buys on the Lower Timeframe (LTF).', checklist: ['Never fight the Daily draw on liquidity', 'Use LTF premium/discount to enter in HTF direction', 'Patience to wait for LTF alignment'] }, { id: 'm7l3', title: 'Framing a Setup', video: 'https://www.youtube.com/embed/w8U7d5x9N7E', desc: 'Putting it all together: Time + HTF Bias + Liquidity Sweep + LTF CHoCH + FVG Entry = A complete trade setup.', checklist: ['Check Time (Killzone)', 'Confirm HTF narrative', 'Wait for the execution pattern to form'] } ], quiz: [ { q: "What is the primary purpose of the Daily chart?", options: ["To find exact entry points", "To determine the overarching Draw on Liquidity (Bias)", "To trade the Silver Bullet", "To hide the noise"], a: 1, explanation: "The Daily chart dictates the macro narrative and points you toward the ultimate Draw on Liquidity (DOL)." }, { q: "If your Daily bias is heavily Bullish, what should you do on the 5-minute chart?", options: ["Look for short setups at resistance", "Look for buy setups in Discount arrays", "Buy blindly at market open", "Trade both directions"], a: 1, explanation: "Align LTF execution with HTF bias by waiting for the LTF to drop into a Discount and form a buy model." }, { q: "Which sequence correctly frames an ICT setup?", options: ["FVG -> Time -> Bias", "Time -> HTF Bias -> Sweep -> CHoCH -> Entry", "Entry -> Bias -> Time", "Sweep -> Entry (No matter the time)"], a: 1, explanation: "Time is first, followed by Bias, a Sweep for fuel, a structural shift (CHoCH), and finally the Entry mechanism." } ] },
+{ id: 'm8', title: 'Module 8: Risk Management', desc: 'The math behind preserving capital and staying in the game.', lessons: [ { id: 'm8l1', title: 'Position Sizing & Risk per Trade', video: 'https://www.youtube.com/embed/2_8r5zU1H-Y', desc: 'Never risk more than 1-2% of your account on a single trade. In funding challenges, risk 0.25% to 0.5%. Capital preservation is priority #1.', checklist: ['Calculate risk before entering', 'Stop loss dictates lot size', 'Live to trade another day'] }, { id: 'm8l2', title: 'Reward to Risk (R:R)', video: 'https://www.youtube.com/embed/K9q2f8v6Q7g', desc: 'Your winners must be larger than your losers. A minimum of 1:2 R:R ensures you can be wrong 50% of the time and still be profitable.', checklist: ['Target logical liquidity pools', 'Do not force unrealistic R:R targets', 'Take partial profits at 1:1 or major hurdles'] }, { id: 'm8l3', title: 'Journaling & Psychology', video: 'https://www.youtube.com/embed/gU9qQ9D6a3A', desc: 'Trading is a battle against yourself. Documenting every trade (emotions, setup criteria, result) is how you build a statistical edge and confidence.', checklist: ['Screenshot entries and exits', 'Note the time of day and emotions', 'Review your journal weekly'] } ], quiz: [ { q: "What is the maximum recommended risk per trade for a funded account?", options: ["5-10%", "2-3%", "0.25% to 1%", "Risk it all on a Silver Bullet"], a: 2, explanation: "Funded accounts have strict drawdown limits. Risking 0.25% to 1% preserves capital and protects against losing streaks." }, { q: "Why is a 1:2 or higher Risk:Reward ratio important?", options: ["It guarantees you win every trade", "It allows you to be profitable even with a 50% win rate", "It makes trades move faster", "It avoids slippage"], a: 1, explanation: "Positive expectancy (R:R > 1:2) ensures mathematical profitability over time, even with moderate win rates." }, { q: "What is the main purpose of a trading journal?", options: ["To show off on Twitter", "To mathematically prove your edge and fix behavioral errors", "To memorize candlestick patterns", "To track tax deductibles"], a: 1, explanation: "A journal provides data on your behavioral flaws and mathematically proves whether your setup has a true statistical edge." } ] }
 ];
 
-/* =========================================
-STATE MANAGEMENT & INIT
-========================================= */
 function initApp() {
 const savedData = localStorage.getItem(APP_DATA_KEY);
 if (savedData) {
 const parsed = JSON.parse(savedData);
 state = { ...state, ...parsed };
-
-if (state.isLoggedIn && !state.rememberMe) {
-state.isLoggedIn = false;
-}
+if (state.isLoggedIn && !state.rememberMe) { state.isLoggedIn = false; }
 }
 
 if (state.isLoggedIn) {
@@ -637,9 +433,7 @@ const last = new Date(state.lastLogin).setHours(0,0,0,0);
 const diff = (today - last) / (1000 * 60 * 60 * 24);
 if (diff === 1) state.streak += 1;
 else if (diff > 1) state.streak = 1;
-} else {
-state.streak = 1;
-}
+} else { state.streak = 1; }
 state.lastLogin = Date.now();
 saveState();
 }
@@ -650,12 +444,8 @@ const u = document.getElementById('username').value.trim();
 const p = document.getElementById('password').value.trim();
 const remember = document.getElementById('remember-me').checked;
 
-// Simplified standard demo login logic
 if (u.toLowerCase() === 'emilia' && p === 'ICTMentorship_Apollo') {
-state.isLoggedIn = true;
-state.rememberMe = remember;
-updateStreak();
-
+state.isLoggedIn = true; state.rememberMe = remember; updateStreak();
 document.getElementById('login-view').classList.add('hidden');
 document.getElementById('app-view').classList.remove('hidden');
 document.getElementById('login-error').classList.add('hidden');
@@ -666,29 +456,20 @@ document.getElementById('login-error').classList.remove('hidden');
 }
 
 function logout() {
-state.isLoggedIn = false;
-state.rememberMe = false;
-saveState();
-location.reload();
+state.isLoggedIn = false; state.rememberMe = false; saveState(); location.reload();
 }
 
-/* =========================================
-NAVIGATION & ROUTING
-========================================= */
-let currentLesson = null;
-let currentModuleId = null;
-let currentQuizModule = null;
-let activeQuizStartTime = 0;
-let activeQuizMode = 'take'; // 'take' or 'review'
-let activeQuizAttemptData = null;
+let currentLesson = null; let currentModuleId = null; let currentQuizModule = null;
+let activeQuizStartTime = 0; let activeQuizMode = 'take'; let activeQuizAttemptData = null;
 
 function nav(view) {
 ['dashboard', 'courses', 'lesson', 'quizzes', 'quiz-run', 'notes'].forEach(v => {
-document.getElementById(view-${v}).classList.add('hidden'); }); document.getElementById(view-${view}).classList.remove('hidden');
+document.getElementById(`view-${v}`).classList.add('hidden'); 
+}); 
+document.getElementById(`view-${view}`).classList.remove('hidden');
 
-// Update sidebar active states
 ['dashboard', 'courses', 'quizzes', 'notes'].forEach(v => {
-const el = document.getElementById(nav-${v}`);
+const el = document.getElementById(`nav-${v}`);
 if (el) {
 if (v === view || (v === 'courses' && view === 'lesson') || (v === 'quizzes' && view === 'quiz-run')) {
 el.classList.add('bg-ict-border', 'text-white');
@@ -705,24 +486,18 @@ if (view === 'courses') renderCourses();
 if (view === 'quizzes') renderQuizzesList();
 if (view === 'notes') renderAllNotes();
 
-// Scroll to top
 document.getElementById('main-content').scrollTop = 0;
 }
 
-/* =========================================
-DASHBOARD
-========================================= */
 function updateDashboardStats() {
 document.getElementById('streak-counter').innerText = state.streak || 0;
-
 const totalLessons = curriculum.reduce((acc, mod) => acc + mod.lessons.length, 0);
 const completed = Object.keys(state.progress).length;
 const pct = totalLessons > 0 ? Math.round((completed / totalLessons) * 100) : 0;
 
 document.getElementById('progress-percent').innerText = pct;
-document.getElementById('progress-bar-fill').style.width = ``${pct}%`;
+document.getElementById('progress-bar-fill').style.width = `${pct}%`;
 
-// Calculate quiz average from history best scores
 let scores = [];
 for (let mId in state.quizHistory) {
 if (state.quizHistory[mId] && state.quizHistory[mId].length > 0) {
@@ -732,7 +507,6 @@ scores.push(best);
 }
 const avg = scores.length ? Math.round(scores.reduce((a,b)=>a+b,0) / scores.length) : 0;
 document.getElementById('quiz-avg').innerText = avg;
-
 document.getElementById('last-export-date').innerText = state.lastExport ? new Date(state.lastExport).toLocaleString() : 'No backup found';
 }
 
@@ -740,28 +514,24 @@ function renderDashboard() {
 updateDashboardStats();
 const feed = document.getElementById('activity-feed');
 feed.innerHTML = '';
-
 let activities = [];
 
-// Add completed lessons
 const completedLessons = Object.keys(state.progress);
 if (completedLessons.length > 0) {
 const last = completedLessons[completedLessons.length-1];
 const lastData = findLessonData(last);
-if (lastData) activities.push({type: 'lesson', text: Mastered concept: &lt;span class="text-white font-medium"&gt;${lastData.title}</span>`, date: Date.now()});
+if (lastData) activities.push({type: 'lesson', text: `Mastered concept: <span class="text-white font-medium">${lastData.title}</span>`, date: Date.now()});
 }
 
-// Add quiz history
 for (let mId in state.quizHistory) {
 const history = state.quizHistory[mId];
 if (history && history.length > 0) {
 const latest = history[history.length-1];
 const mod = curriculum.find(m => m.id === mId);
 if(mod) {
-const colorClass = latest.score >= 80 ? 'text-ict-win' : 'text-orange-400';
 activities.push({
 type: 'quiz',
-text: Assessed Module${mId.replace('m','')}: Scored <span class="{latest.score}%</span>`,
+text: `Assessed Module ${mId.replace('m','')}: Scored <span class="">${latest.score}%</span>`,
 date: latest.date ? new Date(latest.date).getTime() : Date.now()
 });
 }
@@ -769,31 +539,26 @@ date: latest.date ? new Date(latest.date).getTime() : Date.now()
 }
 
 if (state.lastExport) {
-activities.push({type: 'system', text: Cryptographic backup exported successfully., date: state.lastExport});
+activities.push({type: 'system', text: 'Cryptographic backup exported successfully.', date: state.lastExport});
 }
 
 activities.sort((a,b) => b.date - a.date);
-activities = activities.slice(0, 5); // Limit to 5
+activities = activities.slice(0, 5);
 
 if (activities.length === 0) {
 feed.innerHTML = '<li class="text-ict-muted pl-6 py-2 border-l-2 border-transparent">No terminal activity recorded yet.</li>';
 } else {
 activities.forEach(act => {
 let icon = '';
-if(act.type === 'lesson') icon = <div class="absolute -left-[21px] w-10 h-10 bg-ict-panel border border-ict-border rounded-full flex items-center justify-center text-ict-win z-10"&gt;&lt;svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/div>;
-else if(act.type === 'quiz') icon = <div class="absolute -left-[21px] w-10 h-10 bg-ict-panel border border-ict-border rounded-full flex items-center justify-center text-orange-400 z-10"&gt;&lt;svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/div>;
-else icon = <div class="absolute -left-[21px] w-10 h-10 bg-ict-panel border border-ict-border rounded-full flex items-center justify-center text-zinc-400 z-10"&gt;&lt;svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/div>;
+if(act.type === 'lesson') icon = `<div class="absolute -left-[21px] w-10 h-10 bg-ict-panel border border-ict-border rounded-full flex items-center justify-center text-ict-win z-10"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>`;
+else if(act.type === 'quiz') icon = `<div class="absolute -left-[21px] w-10 h-10 bg-ict-panel border border-ict-border rounded-full flex items-center justify-center text-orange-400 z-10"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg></div>`;
+else icon = `<div class="absolute -left-[21px] w-10 h-10 bg-ict-panel border border-ict-border rounded-full flex items-center justify-center text-zinc-400 z-10"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg></div>`;
 
-feed.innerHTML += &lt;li class="relative pl-10 py-3"&gt; ${icon}
-<div class="bg-zinc-800/20 border border-zinc-800 rounded-lg p-3 ml-2">
-<p class="text-sm text-zinc-300">${act.text}&lt;/p&gt; &lt;/div&gt; &lt;/li>;
+feed.innerHTML += `<li class="relative pl-10 py-3"> ${icon} <div class="bg-zinc-800/20 border border-zinc-800 rounded-lg p-3 ml-2"><p class="text-sm text-zinc-300">${act.text}</p></div></li>`;
 });
 }
 }
 
-/* =========================================
-COURSES & LESSONS
-========================================= */
 function renderCourses() {
 const container = document.getElementById('modules-container');
 container.innerHTML = '';
@@ -802,28 +567,13 @@ curriculum.forEach((mod, index) => {
 let completedLessons = mod.lessons.filter(l => state.progress[l.id]).length;
 let pct = Math.round((completedLessons / mod.lessons.length) * 100);
 
-let modHtml = &lt;div class="glass-panel border border-ict-border rounded-2xl overflow-hidden group hover:border-ict-borderHover transition-colors"&gt; &lt;div class="p-6 md:p-8 cursor-pointer flex justify-between items-center bg-zinc-900/50" onclick="toggleAccordion('mod-acc-${mod.id}')">
-<div>
-<div class="flex items-center gap-3 mb-2">
-<span class="text-xs font-bold uppercase tracking-widest text-ict-pink bg-ict-pinkMuted px-2 py-1 rounded">Module ${index+1}&lt;/span&gt; &lt;h3 class="text-xl font-bold text-white"&gt;${mod.title.split(': ')[1]}</h3>
-</div>
-<p class="text-sm text-ict-muted">${mod.desc}&lt;/p&gt; &lt;/div&gt; &lt;div class="flex items-center gap-6"&gt; &lt;div class="text-right hidden sm:block"&gt; &lt;p class="text-xs text-ict-muted uppercase tracking-wider mb-1"&gt;Progress&lt;/p&gt; &lt;p class="text-lg font-bold ${pct===100?'text-ict-win':'text-white'}">${pct}%&lt;/p&gt; &lt;/div&gt; &lt;div class="w-10 h-10 rounded-full border border-ict-border flex items-center justify-center group-hover:bg-ict-border transition-colors"&gt; &lt;svg class="w-5 h-5 text-zinc-400 transition-transform duration-300" id="mod-acc-${mod.id}-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-</div>
-</div>
-</div>
-
-<div id="mod-acc-${mod.id}" class="accordion-content bg-ict-bg border-t border-ict-border"&gt; &lt;div class="p-6 md:p-8 space-y-3">;
+let modHtml = `<div class="glass-panel border border-ict-border rounded-2xl overflow-hidden group hover:border-ict-borderHover transition-colors"><div class="p-6 md:p-8 cursor-pointer flex justify-between items-center bg-zinc-900/50" onclick="toggleAccordion('mod-acc-${mod.id}')"><div><div class="flex items-center gap-3 mb-2"><span class="text-xs font-bold uppercase tracking-widest text-ict-pink bg-ict-pinkMuted px-2 py-1 rounded">Module ${index+1}</span><h3 class="text-xl font-bold text-white">${mod.title.split(': ')[1]}</h3></div><p class="text-sm text-ict-muted">${mod.desc}</p></div><div class="flex items-center gap-6"><div class="text-right hidden sm:block"><p class="text-xs text-ict-muted uppercase tracking-wider mb-1">Progress</p><p class="text-lg font-bold ${pct===100?'text-ict-win':'text-white'}">${pct}%</p></div><div class="w-10 h-10 rounded-full border border-ict-border flex items-center justify-center group-hover:bg-ict-border transition-colors"><svg class="w-5 h-5 text-zinc-400 transition-transform duration-300" id="mod-acc-${mod.id}-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div></div></div><div id="mod-acc-${mod.id}" class="accordion-content bg-ict-bg border-t border-ict-border"><div class="p-6 md:p-8 space-y-3">`;
 
 mod.lessons.forEach(less => {
 const isComp = state.progress[less.id];
-modHtml += &lt;div onclick="openLesson('${mod.id}', '${less.id}')" class="flex items-center justify-between p-4 rounded-xl bg-ict-panel border ${isComp ? 'border-ict-win/30 bg-ict-winMuted' : 'border-ict-border'} hover:border-ict-pink cursor-pointer transition-all hover:shadow-lg hover:shadow-pink-500/10 group/less">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-full flex items-center justify-center ${isComp ? 'bg-ict-win text-white' : 'bg-zinc-800 text-zinc-400'}"&gt; ${isComp ? '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>' : '<svg class="w-5 h-5 ml-1 group-hover/less:text-ict-pink" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>'}
-</div>
-<div>
-<h4 class="text-white font-semibold text-[15px] group-hover/less:text-ict-pink transition-colors">${less.title}&lt;/h4&gt; &lt;/div&gt; &lt;/div&gt; &lt;span class="text-xs text-zinc-500 font-medium tracking-wider uppercase group-hover/less:text-ict-pink transition-colors"&gt;Access Terminal →&lt;/span&gt; &lt;/div>;
+modHtml += `<div onclick="openLesson('${mod.id}', '${less.id}')" class="flex items-center justify-between p-4 rounded-xl bg-ict-panel border ${isComp ? 'border-ict-win/30 bg-ict-winMuted' : 'border-ict-border'} hover:border-ict-pink cursor-pointer transition-all hover:shadow-lg hover:shadow-pink-500/10 group/less"><div class="flex items-center gap-4"><div class="w-10 h-10 rounded-full flex items-center justify-center ${isComp ? 'bg-ict-win text-white' : 'bg-zinc-800 text-zinc-400'}">${isComp ? '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>' : '<svg class="w-5 h-5 ml-1 group-hover/less:text-ict-pink" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>'}</div><div><h4 class="text-white font-semibold text-[15px] group-hover/less:text-ict-pink transition-colors">${less.title}</h4></div></div><span class="text-xs text-zinc-500 font-medium tracking-wider uppercase group-hover/less:text-ict-pink transition-colors">Access Terminal →</span></div>`;
 });
-modHtml += &lt;div class="mt-6 pt-6 border-t border-ict-border flex justify-between items-center"&gt; &lt;p class="text-sm text-ict-muted"&gt;Complete all lessons to attempt the Module Assessment.&lt;/p&gt; &lt;button onclick="nav('quizzes')" class="text-sm font-semibold text-orange-400 hover:text-orange-300"&gt;View Assessments&lt;/button&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div>;
+modHtml += `<div class="mt-6 pt-6 border-t border-ict-border flex justify-between items-center"><p class="text-sm text-ict-muted">Complete all lessons to attempt the Module Assessment.</p><button onclick="nav('quizzes')" class="text-sm font-semibold text-orange-400 hover:text-orange-300">View Assessments</button></div></div></div></div>`;
 container.innerHTML += modHtml;
 });
 }
@@ -831,45 +581,29 @@ container.innerHTML += modHtml;
 function toggleAccordion(id) {
 const el = document.getElementById(id);
 const icon = document.getElementById(id + '-icon');
-if (el.classList.contains('open')) {
-el.classList.remove('open');
-icon.style.transform = 'rotate(0deg)';
-} else {
-el.classList.add('open');
-icon.style.transform = 'rotate(180deg)';
-}
+if (el.classList.contains('open')) { el.classList.remove('open'); icon.style.transform = 'rotate(0deg)'; } 
+else { el.classList.add('open'); icon.style.transform = 'rotate(180deg)'; }
 }
 
 function findLessonData(lessonId) {
-for (let m of curriculum) {
-for (let l of m.lessons) {
-if (l.id === lessonId) return l;
-}
-}
-return null;
+for (let m of curriculum) { for (let l of m.lessons) { if (l.id === lessonId) return l; } } return null;
 }
 
 function openLesson(modId, lessonId) {
-currentLesson = lessonId;
-currentModuleId = modId;
+currentLesson = lessonId; currentModuleId = modId;
 const lesson = findLessonData(lessonId);
 if (!lesson) return;
 
 document.getElementById('lesson-module-tag').innerText = curriculum.find(m=>m.id===modId).title.split(':')[0];
 document.getElementById('lesson-title').innerText = lesson.title;
-
-// Show skeleton while loading
 document.getElementById('video-skeleton').classList.remove('hidden');
 document.getElementById('lesson-video').src = lesson.video;
-
 document.getElementById('lesson-desc').innerText = lesson.desc;
 
 const cl = document.getElementById('lesson-checklist');
-cl.innerHTML = lesson.checklist.map(item => &lt;li class="flex items-start gap-3"&gt; &lt;svg class="w-5 h-5 text-ict-win shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"&gt;&lt;/path&gt;&lt;/svg&gt; &lt;span class="text-zinc-300 text-sm"&gt;${item}</span>
-</li>`).join('');
+cl.innerHTML = lesson.checklist.map(item => `<li class="flex items-start gap-3"><svg class="w-5 h-5 text-ict-win shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-300 text-sm">${item}</span></li>`).join('');
 
 document.getElementById('lesson-notes').value = state.notes[lessonId] || '';
-
 updateCompleteButton();
 renderMiniQuizHistory(modId);
 nav('lesson');
@@ -878,43 +612,30 @@ nav('lesson');
 function updateCompleteButton() {
 const btn = document.getElementById('btn-complete');
 if (state.progress[currentLesson]) {
-btn.innerHTML = <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"&gt;&lt;/path&gt;&lt;/svg&gt; Concept Mastered;
+btn.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Concept Mastered`;
 btn.className = "px-8 py-3.5 rounded-xl font-bold transition-all border border-ict-win bg-ict-winMuted text-ict-win flex items-center gap-2 shadow-lg shadow-emerald-500/10";
 } else {
-btn.innerHTML = Mark as Complete;
+btn.innerHTML = `Mark as Complete`;
 btn.className = "px-8 py-3.5 rounded-xl font-bold transition-all border border-ict-pink bg-ict-pink text-white hover:bg-ict-pinkHover flex items-center gap-2 shadow-lg shadow-pink-500/20";
 }
 }
 
 function toggleLessonComplete() {
-if (state.progress[currentLesson]) {
-delete state.progress[currentLesson];
-} else {
-state.progress[currentLesson] = true;
-}
-saveState();
-updateCompleteButton();
-renderCourses(); // Updates background progress
+if (state.progress[currentLesson]) { delete state.progress[currentLesson]; } else { state.progress[currentLesson] = true; }
+saveState(); updateCompleteButton(); renderCourses(); 
 }
 
 let noteTimeout;
 function saveNotes() {
 if (!currentLesson) return;
 const text = document.getElementById('lesson-notes').value;
-state.notes[currentLesson] = text;
-saveState();
-
+state.notes[currentLesson] = text; saveState();
 const status = document.getElementById('notes-status');
 status.style.opacity = '1';
 clearTimeout(noteTimeout);
-noteTimeout = setTimeout(() => {
-status.style.opacity = '0';
-}, 2000);
+noteTimeout = setTimeout(() => { status.style.opacity = '0'; }, 2000);
 }
 
-/* =========================================
-QUIZ DASHBOARD & HISTORY SYSTEM
-========================================= */
 function renderQuizzesList() {
 const container = document.getElementById('quiz-list-container');
 container.innerHTML = '';
@@ -922,8 +643,7 @@ container.innerHTML = '';
 curriculum.forEach(mod => {
 const history = state.quizHistory[mod.id] || [];
 const attempts = history.length;
-let bestScore = 0;
-let lastDate = 'Never';
+let bestScore = 0; let lastDate = 'Never';
 
 if (attempts > 0) {
 bestScore = Math.max(...history.map(h => h.score));
@@ -932,22 +652,7 @@ lastDate = new Date(history[history.length-1].date).toLocaleDateString();
 
 let scoreClass = bestScore === 100 ? 'text-ict-win' : (bestScore > 0 ? 'text-orange-400' : 'text-zinc-500');
 
-container.innerHTML += &lt;div class="glass-panel border border-ict-border rounded-2xl p-6 md:p-8 flex flex-col justify-between group hover:border-ict-borderHover transition-colors"&gt; &lt;div&gt; &lt;div class="flex justify-between items-start mb-4"&gt; &lt;div&gt; &lt;h3 class="text-xl font-bold text-white"&gt;${mod.title.split(': ')[0]} Assessment</h3>
-<p class="text-sm text-ict-muted mt-1">{scoreClass}">$`{attempts > 0 ? bestScore+'%' : '--'}</p>
-</div>
-</div>
-
-<div class="flex items-center gap-6 text-sm mt-6 pt-6 border-t border-ict-border">
-<div><span class="text-ict-muted block text-xs uppercase">Attempts</span><span class="font-medium">${attempts}&lt;/span&gt;&lt;/div&gt; &lt;div&gt;&lt;span class="text-ict-muted block text-xs uppercase"&gt;Last Activity&lt;/span&gt;&lt;span class="font-medium"&gt;${lastDate}</span></div>
-</div>
-</div>
-
-<div class="flex gap-3 mt-8">
-<button onclick="startQuiz('${mod.id}')" class="flex-1 bg-ict-bg border border-ict-pink text-ict-pink py-3 rounded-xl hover:bg-ict-pink hover:text-white transition-all font-semibold shadow-lg shadow-pink-500/5 active:scale-[0.98]"&gt; ${attempts > 0 ? 'Retake Assessment' : 'Initiate Assessment'}
-</button>
-${attempts &gt; 0 ?<button onclick="reviewLatestQuiz('${mod.id}')" class="bg-zinc-800 border border-ict-border hover:border-zinc-500 text-white px-5 py-3 rounded-xl transition-all font-semibold active:scale-[0.98]"&gt;Review&lt;/button> : ''}
-</div>
-</div>`;
+container.innerHTML += `<div class="glass-panel border border-ict-border rounded-2xl p-6 md:p-8 flex flex-col justify-between group hover:border-ict-borderHover transition-colors"><div><div class="flex justify-between items-start mb-4"><div><h3 class="text-xl font-bold text-white">${mod.title.split(': ')[0]} Assessment</h3><p class="text-sm text-ict-muted mt-1 ${scoreClass}">${attempts > 0 ? bestScore+'%' : '--'}</p></div></div><div class="flex items-center gap-6 text-sm mt-6 pt-6 border-t border-ict-border"><div><span class="text-ict-muted block text-xs uppercase">Attempts</span><span class="font-medium">${attempts}</span></div><div><span class="text-ict-muted block text-xs uppercase">Last Activity</span><span class="font-medium">${lastDate}</span></div></div></div><div class="flex gap-3 mt-8"><button onclick="startQuiz('${mod.id}')" class="flex-1 bg-ict-bg border border-ict-pink text-ict-pink py-3 rounded-xl hover:bg-ict-pink hover:text-white transition-all font-semibold shadow-lg shadow-pink-500/5 active:scale-[0.98]">${attempts > 0 ? 'Retake Assessment' : 'Initiate Assessment'}</button>${attempts > 0 ? `<button onclick="reviewLatestQuiz('${mod.id}')" class="bg-zinc-800 border border-ict-border hover:border-zinc-500 text-white px-5 py-3 rounded-xl transition-all font-semibold active:scale-[0.98]">Review</button>` : ''}</div></div>`;
 });
 }
 
@@ -956,38 +661,23 @@ const history = state.quizHistory[modId] || [];
 const container = document.getElementById('mini-quiz-history');
 const list = document.getElementById('mini-history-list');
 
-if (history.length === 0) {
-container.classList.add('hidden');
-return;
-}
+if (history.length === 0) { container.classList.add('hidden'); return; }
+container.classList.remove('hidden'); list.innerHTML = '';
 
-container.classList.remove('hidden');
-list.innerHTML = '';
-
-// Show last 3 attempts
 const recent = [...history].reverse().slice(0, 3);
-
 recent.forEach((attempt, i) => {
 const isFlawless = attempt.score === 100;
-list.innerHTML += &lt;div class="flex items-center justify-between p-3 rounded-lg bg-ict-bg border border-ict-border text-sm"&gt; &lt;div class="flex items-center gap-3"&gt; &lt;span class="${isFlawless ? 'text-ict-win' : 'text-orange-400'} font-bold w-12">{new Date(attempt.date).toLocaleDateString()}</span>
-</div>
-<button onclick="reviewSpecificQuiz('{history.length - 1 - i})" class="text-ict-pink hover:text-white transition-colors text-xs font-semibold uppercase tracking-wider">Review</button>
-</div>
-`;
+list.innerHTML += `<div class="flex items-center justify-between p-3 rounded-lg bg-ict-bg border border-ict-border text-sm"><div class="flex items-center gap-3"><span class="${isFlawless ? 'text-ict-win' : 'text-orange-400'} font-bold w-12">${attempt.score}%</span><span class="text-zinc-500">${new Date(attempt.date).toLocaleDateString()}</span></div><button onclick="reviewSpecificQuiz('${modId}', ${history.length - 1 - i})" class="text-ict-pink hover:text-white transition-colors text-xs font-semibold uppercase tracking-wider">Review</button></div>`;
 });
 }
 
-function startQuizFromLesson() {
-if(currentModuleId) startQuiz(currentModuleId);
-}
+function startQuizFromLesson() { if(currentModuleId) startQuiz(currentModuleId); }
 
 function startQuiz(modId) {
-currentQuizModule = modId;
-activeQuizMode = 'take';
-activeQuizStartTime = Date.now();
-
+currentQuizModule = modId; activeQuizMode = 'take'; activeQuizStartTime = Date.now();
 const mod = curriculum.find(m => m.id === modId);
-document.getElementById('active-quiz-title').innerText = ${mod.title} - Assessment`;
+
+document.getElementById('active-quiz-title').innerText = `${mod.title} - Assessment`;
 document.getElementById('quiz-meta-info').classList.add('hidden');
 document.getElementById('quiz-review-score-header').classList.add('hidden');
 document.getElementById('btn-submit-quiz').classList.remove('hidden');
@@ -996,13 +686,8 @@ const qContainer = document.getElementById('quiz-questions-container');
 qContainer.innerHTML = '';
 
 mod.quiz.forEach((q, index) => {
-let optionsHtml = q.options.map((opt, i) => &lt;label class="block p-4 rounded-xl border border-ict-border bg-ict-bg cursor-pointer hover:border-ict-pink transition-all mb-3 flex items-center gap-4 group"&gt; &lt;div class="relative flex items-center justify-center"&gt; &lt;input type="radio" name="q${index}" value="{opt}</span>
-</label>
-`).join('');
-
-qContainer.innerHTML += &lt;div class="quiz-question-block bg-ict-panel rounded-2xl p-1"&gt; &lt;p class="text-white font-bold mb-4 text-lg"&gt;&lt;span class="text-ict-pink mr-2"&gt;Q${index + 1}.</span> ${q.q}&lt;/p&gt; ${optionsHtml}
-</div>
-`;
+let optionsHtml = q.options.map((opt, i) => `<label class="block p-4 rounded-xl border border-ict-border bg-ict-bg cursor-pointer hover:border-ict-pink transition-all mb-3 flex items-center gap-4 group"><div class="relative flex items-center justify-center"><input type="radio" name="q${index}" value="${i}" class="w-5 h-5 opacity-0 absolute" required><div class="w-5 h-5 rounded-full border-2 border-zinc-600 group-hover:border-ict-pink transition-colors"></div></div><span class="text-zinc-300 font-medium">${opt}</span></label>`).join('');
+qContainer.innerHTML += `<div class="quiz-question-block bg-ict-panel rounded-2xl p-1"><p class="text-white font-bold mb-4 text-lg"><span class="text-ict-pink mr-2">Q${index + 1}.</span> ${q.q}</p>${optionsHtml}</div>`;
 });
 
 nav('quiz-run');
@@ -1014,11 +699,10 @@ if (activeQuizMode === 'review') return;
 
 const mod = curriculum.find(m => m.id === currentQuizModule);
 const formData = new FormData(e.target);
-let correctCount = 0;
-let userAnswers = [];
+let correctCount = 0; let userAnswers = [];
 
 mod.quiz.forEach((q, index) => {
-const answer = parseInt(formData.get(q${index}`));
+const answer = parseInt(formData.get(`q${index}`));
 userAnswers.push(answer);
 if (answer === q.a) correctCount++;
 });
@@ -1026,64 +710,41 @@ if (answer === q.a) correctCount++;
 const score = Math.round((correctCount / mod.quiz.length) * 100);
 const timeTakenSec = Math.floor((Date.now() - activeQuizStartTime) / 1000);
 
-// Build History Record
-const attemptRecord = {
-date: new Date().toISOString(),
-score: score,
-correct: correctCount,
-incorrect: mod.quiz.length - correctCount,
-timeTaken: timeTakenSec,
-answers: userAnswers
-};
+const attemptRecord = { date: new Date().toISOString(), score: score, correct: correctCount, incorrect: mod.quiz.length - correctCount, timeTaken: timeTakenSec, answers: userAnswers };
 
-if (!state.quizHistory[currentQuizModule]) {
-state.quizHistory[currentQuizModule] = [];
-}
+if (!state.quizHistory[currentQuizModule]) { state.quizHistory[currentQuizModule] = []; }
 state.quizHistory[currentQuizModule].push(attemptRecord);
 saveState();
 
-if (score === 100) {
-triggerCelebration(currentQuizModule);
-}
-
-// Immediately transition to review mode for this attempt
+if (score === 100) { triggerCelebration(currentQuizModule); }
 reviewSpecificQuiz(currentQuizModule, state.quizHistory[currentQuizModule].length - 1);
 }
 
 function reviewLatestQuiz(modId) {
 const history = state.quizHistory[modId];
-if(history && history.length > 0) {
-reviewSpecificQuiz(modId, history.length - 1);
-}
+if(history && history.length > 0) { reviewSpecificQuiz(modId, history.length - 1); }
 }
 
 function reviewSpecificQuiz(modId, attemptIndex) {
-currentQuizModule = modId;
-activeQuizMode = 'review';
+currentQuizModule = modId; activeQuizMode = 'review';
 const mod = curriculum.find(m => m.id === modId);
 const attemptData = state.quizHistory[modId][attemptIndex];
 
-document.getElementById('active-quiz-title').innerText = ${mod.title} - Review`;
+document.getElementById('active-quiz-title').innerText = `${mod.title} - Review`;
 document.getElementById('btn-submit-quiz').classList.add('hidden');
-
-// Setup meta info
 document.getElementById('quiz-meta-info').classList.remove('hidden');
-document.getElementById('quiz-meta-date').innerHTML = <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"&gt;&lt;/path&gt;&lt;/svg&gt;${new Date(attemptData.date).toLocaleString()}`;
+document.getElementById('quiz-meta-date').innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>${new Date(attemptData.date).toLocaleString()}`;
 
 if (!attemptData.legacy) {
-const mins = Math.floor(attemptData.timeTaken / 60);
-const secs = attemptData.timeTaken % 60;
-document.getElementById('quiz-meta-time').innerHTML = <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"&gt;&lt;/path&gt;&lt;/svg&gt; ${mins}m ${secs}s;
+const mins = Math.floor(attemptData.timeTaken / 60); const secs = attemptData.timeTaken % 60;
+document.getElementById('quiz-meta-time').innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> ${mins}m ${secs}s`;
 document.getElementById('quiz-meta-time').classList.remove('hidden');
-} else {
-document.getElementById('quiz-meta-time').classList.add('hidden');
-}
+} else { document.getElementById('quiz-meta-time').classList.add('hidden'); }
 
-// Setup score header
 document.getElementById('quiz-review-score-header').classList.remove('hidden');
 const scoreDisp = document.getElementById('review-score-display');
 scoreDisp.innerText = attemptData.score + '%';
-scoreDisp.className = text-6xl font-black ${attemptData.score === 100 ? 'text-ict-win drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]' : (attemptData.score >= 50 ? 'text-orange-400' : 'text-ict-loss')}`;
+scoreDisp.className = `text-6xl font-black ${attemptData.score === 100 ? 'text-ict-win drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]' : (attemptData.score >= 50 ? 'text-orange-400' : 'text-ict-loss')}`;
 
 const qContainer = document.getElementById('quiz-questions-container');
 qContainer.innerHTML = '';
@@ -1093,58 +754,28 @@ const userAnswer = attemptData.legacy ? -1 : attemptData.answers[index];
 const isCorrect = userAnswer === q.a;
 
 let optionsHtml = q.options.map((opt, i) => {
-let borderClass = 'border-ict-border bg-ict-bg';
-let textClass = 'text-zinc-400';
-let iconHtml = '<div class="w-5 h-5 rounded-full border-2 border-zinc-700"></div>';
+let borderClass = 'border-ict-border bg-ict-bg'; let textClass = 'text-zinc-400'; let iconHtml = '<div class="w-5 h-5 rounded-full border-2 border-zinc-700"></div>';
 
-if (i === q.a) {
-// Correct Answer Style
-borderClass = 'border-ict-win bg-ict-winMuted shadow-[0_0_15px_rgba(16,185,129,0.1)]';
-textClass = 'text-white font-semibold';
-iconHtml = '<svg class="w-5 h-5 text-ict-win" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>';
-} else if (i === userAnswer && i !== q.a) {
-// Wrong Answer Style
-borderClass = 'border-ict-loss bg-ict-lossMuted';
-textClass = 'text-white';
-iconHtml = '<svg class="w-5 h-5 text-ict-loss" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>';
-}
+if (i === q.a) { borderClass = 'border-ict-win bg-ict-winMuted shadow-[0_0_15px_rgba(16,185,129,0.1)]'; textClass = 'text-white font-semibold'; iconHtml = '<svg class="w-5 h-5 text-ict-win" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>'; } 
+else if (i === userAnswer && i !== q.a) { borderClass = 'border-ict-loss bg-ict-lossMuted'; textClass = 'text-white'; iconHtml = '<svg class="w-5 h-5 text-ict-loss" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>'; }
 
-return &lt;div class="block p-4 rounded-xl border${borderClass} mb-3 flex items-center gap-4 transition-all pointer-events-none">
-<div class="relative flex items-center justify-center shrink-0">
-{textClass} text-[15px]">{(i === userAnswer && !isCorrect) ? '<span class="ml-auto text-xs font-bold text-ict-loss uppercase tracking-wider">Your Selection</span>' : ''}
-${(i === q.a && userAnswer === q.a) ? '&lt;span class="ml-auto text-xs font-bold text-ict-win uppercase tracking-wider"&gt;Correct&lt;/span&gt;' : ''} &lt;/div&gt;});
+return `<div class="block p-4 rounded-xl border ${borderClass} mb-3 flex items-center gap-4 transition-all pointer-events-none"><div class="relative flex items-center justify-center shrink-0">${iconHtml}</div><span class="${textClass} text-[15px]">${opt}</span>${(i === userAnswer && !isCorrect) ? '<span class="ml-auto text-xs font-bold text-ict-loss uppercase tracking-wider">Your Selection</span>' : ''}${(i === q.a && userAnswer === q.a) ? '<span class="ml-auto text-xs font-bold text-ict-win uppercase tracking-wider">Correct</span>' : ''}</div>`;
+});
 
 let explanationHtml = '';
 if (q.explanation && (!attemptData.legacy)) {
-explanationHtml = &lt;div class="mt-4 p-4 rounded-lg bg-blue-900/10 border border-blue-500/20 flex gap-3 items-start"&gt; &lt;svg class="w-5 h-5 text-blue-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"&gt;&lt;/path&gt;&lt;/svg&gt; &lt;p class="text-sm text-blue-100 leading-relaxed"&gt;&lt;span class="font-bold text-blue-300"&gt;Analysis:&lt;/span&gt;${q.explanation}</p>
-</div>
-`;
+explanationHtml = `<div class="mt-4 p-4 rounded-lg bg-blue-900/10 border border-blue-500/20 flex gap-3 items-start"><svg class="w-5 h-5 text-blue-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><p class="text-sm text-blue-100 leading-relaxed"><span class="font-bold text-blue-300">Analysis: </span>${q.explanation}</p></div>`;
 }
 
-qContainer.innerHTML += &lt;div class="quiz-question-block bg-ict-bg border ${!attemptData.legacy ? (isCorrect ? 'border-ict-win/30' : 'border-ict-loss/30') : 'border-ict-border'} rounded-2xl p-6">
-<p class="text-white font-bold mb-6 text-lg"><span class="text-zinc-500 mr-2">Q${index + 1}.&lt;/span&gt; ${q.q}</p>
-${optionsHtml.join('')} ${explanationHtml}
-</div>
-`;
+qContainer.innerHTML += `<div class="quiz-question-block bg-ict-bg border ${!attemptData.legacy ? (isCorrect ? 'border-ict-win/30' : 'border-ict-loss/30') : 'border-ict-border'} rounded-2xl p-6"><p class="text-white font-bold mb-6 text-lg"><span class="text-zinc-500 mr-2">Q${index + 1}.</span> ${q.q}</p>${optionsHtml.join('')} ${explanationHtml}</div>`;
 });
 
 nav('quiz-run');
 }
 
-function triggerCelebration(modId) {
-document.getElementById('celebration-modal').classList.remove('hidden');
-// Mock audio play
-console.log("Playing reward audio for Flawless Victory...");
-}
+function triggerCelebration(modId) { document.getElementById('celebration-modal').classList.remove('hidden'); console.log("Playing reward audio for Flawless Victory..."); }
+function closeModal() { document.getElementById('celebration-modal').classList.add('hidden'); }
 
-function closeModal() {
-document.getElementById('celebration-modal').classList.add('hidden');
-// Already in review mode behind the modal, just let them see it
-}
-
-/* =========================================
-NOTES SYSTEM
-========================================= */
 function renderAllNotes() {
 const query = document.getElementById('note-search').value.toLowerCase();
 const container = document.getElementById('all-notes-container');
@@ -1155,74 +786,46 @@ for (let lessonId in state.notes) {
 const text = state.notes[lessonId];
 if (text && text.trim() !== '') {
 if (query && !text.toLowerCase().includes(query)) continue;
-
 const lesson = findLessonData(lessonId);
 if (!lesson) continue;
 
-// Find module for routing
 let parentModId = '';
 curriculum.forEach(m => { if(m.lessons.find(l=>l.id===lessonId)) parentModId = m.id; });
-
 found = true;
-container.innerHTML += &lt;div class="glass-panel border border-ict-border p-6 rounded-2xl flex flex-col group hover:border-ict-borderHover transition-colors"&gt; &lt;div class="flex justify-between items-start mb-4"&gt; &lt;div&gt; &lt;p class="text-xs font-bold text-ict-pink uppercase tracking-widest mb-1"&gt;Lesson Note&lt;/p&gt; &lt;h4 class="font-bold text-white text-lg leading-tight"&gt;${lesson.title}</h4>
-</div>
-<button onclick="openLesson('{lessonId}')" class="w-8 h-8 rounded-full bg-ict-bg border border-ict-border flex items-center justify-center hover:text-ict-pink transition-colors shrink-0">
-<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-</button>
-</div>
-<div class="bg-ict-bg p-4 rounded-xl border border-ict-border flex-1">
-<p class="text-[14px] text-zinc-300 whitespace-pre-wrap leading-relaxed">${text}&lt;/p&gt; &lt;/div&gt; &lt;/div&gt;;
+container.innerHTML += `<div class="glass-panel border border-ict-border p-6 rounded-2xl flex flex-col group hover:border-ict-borderHover transition-colors"><div class="flex justify-between items-start mb-4"><div><p class="text-xs font-bold text-ict-pink uppercase tracking-widest mb-1">Lesson Note</p><h4 class="font-bold text-white text-lg leading-tight">${lesson.title}</h4></div><button onclick="openLesson('${parentModId}','${lessonId}')" class="w-8 h-8 rounded-full bg-ict-bg border border-ict-border flex items-center justify-center hover:text-ict-pink transition-colors shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></button></div><div class="bg-ict-bg p-4 rounded-xl border border-ict-border flex-1"><p class="text-[14px] text-zinc-300 whitespace-pre-wrap leading-relaxed">${text}</p></div></div>`;
 }
 }
 if (!found) {
-container.innerHTML = &lt;div class="col-span-1 md:col-span-2 text-center py-16 border-2 border-dashed border-ict-border rounded-3xl"&gt; &lt;svg class="w-12 h-12 text-zinc-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"&gt;&lt;/path&gt;&lt;/svg&gt; &lt;p class="text-lg font-medium text-white mb-1"&gt;No insights found&lt;/p&gt; &lt;p class="text-zinc-500"&gt;Take notes during lessons to build your personal knowledge base.&lt;/p&gt; &lt;/div>;
+container.innerHTML = `<div class="col-span-1 md:col-span-2 text-center py-16 border-2 border-dashed border-ict-border rounded-3xl"><svg class="w-12 h-12 text-zinc-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg><p class="text-lg font-medium text-white mb-1">No insights found</p><p class="text-zinc-500">Take notes during lessons to build your personal knowledge base.</p></div>`;
 }
 }
 
-/* =========================================
-DATA SYNC (EXPORT/IMPORT)
-========================================= */
 function exportData() {
-state.lastExport = Date.now();
-saveState();
-
+state.lastExport = Date.now(); saveState();
 const dataStr = JSON.stringify(state, null, 2);
 const blob = new Blob([dataStr], { type: "application/json" });
 const url = URL.createObjectURL(blob);
-
 const a = document.createElement('a');
-a.href = url;
-a.download = apollo-terminal-backup-${new Date().toISOString().split('T')[0]}.json`;
-document.body.appendChild(a);
-a.click();
-document.body.removeChild(a);
-URL.revokeObjectURL(url);
-
+a.href = url; a.download = `apollo-terminal-backup-${new Date().toISOString().split('T')[0]}.json`;
+document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
 renderDashboard();
 }
 
 function importData(event) {
-const file = event.target.files[0];
-if (!file) return;
-
+const file = event.target.files[0]; if (!file) return;
 const reader = new FileReader();
 reader.onload = function(e) {
 try {
 const importedState = JSON.parse(e.target.result);
 if (importedState && typeof importedState === 'object') {
-state = { ...state, ...importedState };
-saveState();
-alert("Cryptographic backup restored successfully. Re-initializing terminal...");
-location.reload();
+state = { ...state, ...importedState }; saveState();
+alert("Cryptographic backup restored successfully. Re-initializing terminal..."); location.reload();
 }
-} catch (err) {
-alert("System Error: Backup file corrupted or invalid JSON signature.");
-}
+} catch (err) { alert("System Error: Backup file corrupted or invalid JSON signature."); }
 };
 reader.readAsText(file);
 }
 
-// Boot
 window.onload = initApp;
 </script>
 </body>
